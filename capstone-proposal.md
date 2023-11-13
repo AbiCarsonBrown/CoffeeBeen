@@ -60,7 +60,7 @@ The app is for coffee lovers or those who want to discover more. They may want t
 
 ### Mockups
 
-Provide visuals of your app's screens. You can use tools like Figma or pictures of hand-drawn sketches.
+![Rough mockup sketches of app screens.](./assets/diagrams/mockup-sketches.png)
 
 ### Data
 
