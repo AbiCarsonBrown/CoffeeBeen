@@ -60,11 +60,11 @@ The app is for coffee lovers or those who want to discover more. They may want t
 
 ### Mockups
 
-![Rough mockup sketches of app screens.](./assets/diagrams/mockup-sketches.png)
+![Rough mockup sketches of app screens.](./src/assets/diagrams/mockup-sketches.png)
 
 ### Data
 
-![Diagram of basic database tables and relationships between them.](./assets/diagrams/database-diagram.png)
+![Diagram of basic database tables and relationships between them.](./src/assets/diagrams/database-diagram.png)
 
 > User Submitted Coffee Shops is a _nice to have_ feature
 
