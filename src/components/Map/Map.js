@@ -5,24 +5,36 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 import coffeeCup from "../../assets/icons/coffee-to-go.svg";
+import "./Map.scss";
+import { useEffect, useState } from "react";
+import { fetchCoffeeShops } from "../../utils/axios";
+import { Link } from "react-router-dom";
 
 export default function Map() {
+  const [coffeeShops, setCoffeeShops] = useState(null);
+  const [isOpen, setIsOpen] = useState(null);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
   const center = { lat: 51.507744, lng: -0.119071 };
   // useMemo?
 
-  const visited = [
-    { lat: 51.5357429, lng: -0.1279246 },
-    { lat: 51.5066218, lng: -0.0911243 },
-  ];
+  const getCoffeeShops = async () => {
+    try {
+      const { data } = await fetchCoffeeShops();
+      setCoffeeShops(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  const notVisited = [
-    { address: "address 1", lat: 51.5263922, lng: -0.083686 },
-    { address: "address 2", lat: 51.5165186, lng: -0.1441735 },
-    { address: "address 3", lat: 51.5128716, lng: -0.1299463 },
-  ];
+  useEffect(() => {
+    getCoffeeShops();
+  }, []);
+
+  const handleInfoOpen = (id) => {
+    setIsOpen(id);
+  };
 
   const options = {
     disableDefaultUI: true,
@@ -71,7 +83,7 @@ export default function Map() {
 
   return (
     <>
-      {!isLoaded ? (
+      {!isLoaded || !coffeeShops ? (
         <h1>Loading...</h1>
       ) : (
         <GoogleMap
@@ -79,16 +91,23 @@ export default function Map() {
           center={center}
           options={options}
           zoom={14}>
-          {visited.map(({ lat, lng }) => (
-            <MarkerF position={{ lat, lng }} />
-          ))}
-          {notVisited.map(({ lat, lng }) => (
-            <MarkerF
-              position={{ lat, lng }}
-              icon={coffeeCup}
-              className="not-visited__marker"
-            />
-          ))}
+          {coffeeShops.map(({ id, coffeeshop_name, latitude, longitude }) => {
+            return (
+              <MarkerF
+                key={id}
+                position={{
+                  lat: Number(latitude),
+                  lng: Number(longitude),
+                }}
+                onClick={() => handleInfoOpen(id)}>
+                {isOpen === id && (
+                  <InfoWindowF>
+                    <Link to={`/${id}`}>{coffeeshop_name}</Link>
+                  </InfoWindowF>
+                )}
+              </MarkerF>
+            );
+          })}
         </GoogleMap>
       )}
     </>
