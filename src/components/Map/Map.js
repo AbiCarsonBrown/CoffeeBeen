@@ -18,6 +18,7 @@ export default function Map() {
   });
   const center = { lat: 51.507744, lng: -0.119071 };
   // useMemo?
+  // recentre when coffeeshop clicked
 
   const getCoffeeShops = async () => {
     try {
@@ -102,7 +103,7 @@ export default function Map() {
                 onClick={() => handleInfoOpen(id)}>
                 {isOpen === id && (
                   <InfoWindowF>
-                    <Link to={`/${id}`}>{coffeeshop_name}</Link>
+                    <Link to={`/coffeeshop/${id}`}>{coffeeshop_name}</Link>
                   </InfoWindowF>
                 )}
               </MarkerF>
