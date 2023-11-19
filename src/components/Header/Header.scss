@@ -1,0 +1,43 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.header {
+  background-color: $primary-colour;
+  z-index: 1;
+  height: 4.5rem;
+  padding: 0.75rem;
+
+  @include tablet {
+    height: 5rem;
+    padding: 1rem 1.25rem;
+  }
+
+  @include desktop {
+    @include flex(row, center, center);
+    height: 6rem;
+  }
+
+  &__group {
+    @include flex(row, flex-start, center);
+  }
+
+  &__logo {
+    height: 3rem;
+    padding-right: 0.3rem;
+
+    @include desktop {
+      height: 4rem;
+      padding-right: 0.4rem;
+    }
+  }
+
+  &__title {
+    color: $highlight-colour;
+    font-weight: 500;
+    font-style: italic;
+
+    @include desktop {
+      font-size: 2rem;
+    }
+  }
+}

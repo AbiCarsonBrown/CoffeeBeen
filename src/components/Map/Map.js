@@ -4,7 +4,7 @@ import {
   MarkerF,
   useLoadScript,
 } from "@react-google-maps/api";
-import coffeeCup from "../../assets/icons/coffee-to-go.svg";
+import marker from "../../assets/icons/marker-brown.svg";
 import "./Map.scss";
 import { useEffect, useState } from "react";
 import { fetchCoffeeShops } from "../../utils/axios";
@@ -19,6 +19,14 @@ export default function Map() {
   const center = { lat: 51.507744, lng: -0.119071 };
   // useMemo?
   // recentre when coffeeshop clicked
+
+  const customMarker = {
+    path: { marker },
+    fillOpacity: 2,
+    strokeWeight: 1,
+    rotation: 0,
+    scale: 0.25,
+  };
 
   const getCoffeeShops = async () => {
     try {
@@ -96,6 +104,7 @@ export default function Map() {
             return (
               <MarkerF
                 key={id}
+                icon={marker}
                 position={{
                   lat: Number(latitude),
                   lng: Number(longitude),

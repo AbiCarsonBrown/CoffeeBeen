@@ -7,9 +7,6 @@ import ReviewCard from "../../components/ReviewCard/ReviewCard";
 export default function CoffeeShop() {
   const [coffeeShop, setCoffeeShop] = useState(null);
   const [visits, setVisits] = useState(null);
-  // const [visitCount, setVisitCount] = useState(0);
-  // const [reviews, setReviews] = useState([]);
-  // const [averageRating, setAverageRating] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const { coffeeShopId } = useParams();
 
@@ -54,10 +51,10 @@ export default function CoffeeShop() {
   });
 
   return (
-    <main>
-      <h1>{coffeeShop.coffeeshop_name}</h1>
-      <p>{coffeeShop.address}</p>
-      <p>{coffeeShop.description}</p>
+    <main className="coffeeshop">
+      <h1 className="coffeeshop__title">{coffeeShop.coffeeshop_name}</h1>
+      <h3 className="coffeeshop__address">{coffeeShop.address}</h3>
+      <p className="coffeeshop__description">{coffeeShop.description}</p>
       <p>Total User Visits: {visitCount}</p>
       <p>Average Rating: {averageRating}</p>
       {reviews.map((review, i) => (
