@@ -2,6 +2,8 @@
 @use "../../styles/partials/variables" as *;
 
 .header {
+  position: fixed;
+  width: 100%;
   background-color: $primary-colour;
   z-index: 1;
   height: 4.5rem;
@@ -13,12 +15,26 @@
   }
 
   @include desktop {
-    @include flex(row, center, center);
     height: 6rem;
   }
 
-  &__group {
+  &__wrapper {
+    @include flex(row, center, center);
+    width: 100%;
+
+    @include tablet {
+      justify-content: flex-start;
+    }
+
+    @include desktop {
+      max-width: $wrapper-maxwidth;
+      margin: 0 auto;
+    }
+  }
+
+  &__link {
     @include flex(row, flex-start, center);
+    text-decoration: none;
   }
 
   &__logo {
