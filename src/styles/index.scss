@@ -5,6 +5,7 @@
 main {
   height: 100vh;
   padding-top: 4.5rem;
+  overflow: scroll;
 
   @include tablet {
     padding-top: 5rem;

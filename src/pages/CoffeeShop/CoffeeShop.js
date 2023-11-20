@@ -98,10 +98,13 @@ export default function CoffeeShop() {
           className="coffeeshop__reviews">
           Reviews ({reviews.length})
         </button>
-        {seeReviews &&
-          reviews.map((review, i) => (
-            <ReviewCard key={i} user={review.user} review={review.review} />
-          ))}
+        {seeReviews && (
+          <div className="coffeeshop__reviews-list">
+            {reviews.map((review, i) => (
+              <ReviewCard key={i} user={review.user} review={review.review} />
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );

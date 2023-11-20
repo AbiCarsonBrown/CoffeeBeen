@@ -121,6 +121,19 @@
       margin-top: 0;
       cursor: pointer;
     }
+
+    &-list {
+      @include tablet {
+        @include flex(row, space-between, center);
+        flex-wrap: wrap;
+        width: 35rem;
+      }
+
+      @include desktop {
+        justify-content: flex-start;
+        width: 51rem;
+      }
+    }
   }
 
   &--highlight {
