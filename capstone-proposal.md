@@ -15,8 +15,8 @@ The app is for coffee lovers or those who want to discover more. They may want t
 
 ### Features
 
-- FIND coffee shops - use the app's map or list function to see great coffee shops and where they are
-- TRACK the spots you've visited - like a scratch map or sticker collection
+- FIND coffee shops - use the app's map to see great coffee shops and where they are
+- TRACK the spots you've visited and would like to visit
 - RATE them - give a review and a rating on our 1-5 coffee bean scale
 
 ## Implementation

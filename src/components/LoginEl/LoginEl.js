@@ -1,6 +1,6 @@
 import "./LoginEl.scss";
 
-export default function LoginEl({ title, signUp, clickHandler }) {
+export default function LoginEl({ title, signUp, clickHandler, formErrors }) {
   return (
     <article className="log-in">
       <h1 className="log-in__title">{title}</h1>
@@ -9,13 +9,13 @@ export default function LoginEl({ title, signUp, clickHandler }) {
         {signUp && (
           <>
             <div className="log-in__group">
-              <label htmlFor="full-name" className="log-in__label">
+              <label htmlFor="name" className="log-in__label">
                 Full Name:
               </label>
               <input
                 type="text"
-                id="full-name"
-                name="full-name"
+                id="name"
+                name="name"
                 className="log-in__input"
                 placeholder="Enter your full name"
               />
@@ -47,13 +47,18 @@ export default function LoginEl({ title, signUp, clickHandler }) {
             className="log-in__input"
             placeholder="Enter your email address"
           />
+          <p
+            className={`log-in__error ${
+              formErrors.email ? "log-in__error--true" : ""
+            }`}>
+            Please enter your email address
+          </p>
         </div>
 
         <div className="log-in__group">
           <label htmlFor="password" className="log-in__label">
             Password:
           </label>
-
           <input
             type="password"
             id="password"
@@ -63,11 +68,19 @@ export default function LoginEl({ title, signUp, clickHandler }) {
               signUp ? "Choose your password" : "Enter your password"
             }`}
           />
+
+          {!signUp && (
+            <p
+              className={`log-in__error ${
+                formErrors.email ? "log-in__error--true" : ""
+              }`}>
+              Please enter your password
+            </p>
+          )}
         </div>
 
         {signUp && (
           <div className="log-in__group">
-            {" "}
             <label htmlFor="confirm-password" className="log-in__label">
               Confirm Password:
             </label>
