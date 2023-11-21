@@ -9,6 +9,7 @@ const fetchCoffeeShop = async (id) =>
 
 const logIn = async (user) => await axios.post(`${baseUrl}/auth/login`, user);
 
-const signUp = async (user) => await axios.post(`${baseUrl}/auth/signup`, user);
+const register = async (user) =>
+  await axios.post(`${baseUrl}/auth/register`, user);
 
-export { fetchCoffeeShops, fetchCoffeeShop, logIn, signUp };
+export { fetchCoffeeShops, fetchCoffeeShop, logIn, register };

@@ -1,11 +1,13 @@
 import "./Login.scss";
 import { useState } from "react";
 import LoginEl from "../../components/LoginEl/LoginEl";
-import { logIn, signUp } from "../../utils/axios";
+import { logIn, register } from "../../utils/axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [signUp, setSignUp] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
 
   const noFormErrors = {
@@ -14,14 +16,17 @@ export default function Login() {
     email: false,
     password: false,
     confirm_password: false,
+    password_match: false,
   };
 
-  const [logInFormErrors, setLogInFormErrors] = useState(noFormErrors);
-  const [signUpFormErrors, setSignUpFormErrors] = useState(noFormErrors);
+  const [formErrors, setFormErrors] = useState(noFormErrors);
 
   const handleLogIn = async (event) => {
     event.preventDefault();
     let formIsValid = true;
+    setError(null);
+    setSuccess(null);
+    setFormErrors(noFormErrors);
     const isFormErrors = { ...noFormErrors };
     const data = event.target;
 
@@ -34,7 +39,7 @@ export default function Login() {
       isFormErrors.password = true;
     }
     if (!formIsValid) {
-      return setLogInFormErrors(isFormErrors);
+      return setFormErrors(isFormErrors);
     }
 
     const user = {
@@ -45,19 +50,52 @@ export default function Login() {
     try {
       const response = await logIn(user);
       localStorage.setItem("token", response.data.token);
+      setSuccess(true);
       setTimeout(() => {
         navigate("/profile");
       }, 1000);
     } catch (error) {
       console.error(error);
+      setError(error.response.data);
     }
-
-    console.log(user);
   };
 
-  const handleSignUp = (event) => {
+  const handleSignUp = async (event) => {
     event.preventDefault();
+    let formIsValid = true;
+    setError(null);
+    setSuccess(null);
+    setFormErrors(noFormErrors);
+    const isFormErrors = { ...noFormErrors };
     const data = event.target;
+
+    if (!data.name.value) {
+      formIsValid = false;
+      isFormErrors.name = true;
+    }
+    if (!data.username.value) {
+      formIsValid = false;
+      isFormErrors.username = true;
+    }
+    if (!data.email.value) {
+      formIsValid = false;
+      isFormErrors.email = true;
+    }
+    if (!data.password.value) {
+      formIsValid = false;
+      isFormErrors.password = true;
+    }
+    if (!data.confirm_password.value) {
+      formIsValid = false;
+      isFormErrors.confirm_password = true;
+    }
+    if (data.confirm_password.value !== data.password.value) {
+      formIsValid = false;
+      isFormErrors.password_match = true;
+    }
+    if (!formIsValid) {
+      return setFormErrors(isFormErrors);
+    }
 
     const newUser = {
       full_name: data.name.value,
@@ -66,7 +104,21 @@ export default function Login() {
       password: data.password.value,
     };
 
-    console.log("Signed Up");
+    try {
+      await register(newUser);
+      const response = await logIn({
+        email: newUser.email,
+        password: newUser.password,
+      });
+      localStorage.setItem("token", response.data.token);
+      setSuccess(true);
+      setTimeout(() => {
+        navigate("/profile");
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+      setError(error.response.data);
+    }
   };
 
   return (
@@ -93,7 +145,9 @@ export default function Login() {
             title="Log In to Your Account"
             signUp={false}
             clickHandler={handleLogIn}
-            formErrors={logInFormErrors}
+            formErrors={formErrors}
+            error={error}
+            success={success}
           />
         )}
         {signUp && (
@@ -101,6 +155,9 @@ export default function Login() {
             title="Sign Up for a Free Account"
             signUp={true}
             clickHandler={handleSignUp}
+            formErrors={formErrors}
+            error={error}
+            success={success}
           />
         )}
       </div>
