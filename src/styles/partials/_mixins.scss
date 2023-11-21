@@ -23,3 +23,19 @@
     @content;
   }
 }
+
+@mixin wrapper {
+  @include desktop {
+    max-width: $wrapper-maxwidth;
+    margin: 0 auto;
+  }
+}
+
+@mixin card {
+  background-color: $secondary-background;
+  color: $primary-colour;
+  padding: 0.75rem;
+  border-radius: 5px;
+  border: 0.25px solid rgba(89, 75, 71, 0.5);
+  box-shadow: 1px 1px rgba(89, 75, 71, 0.5);
+}

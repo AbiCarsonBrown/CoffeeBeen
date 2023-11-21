@@ -2,23 +2,10 @@
 @use "../../styles/partials/variables" as *;
 
 .coffeeshop {
-  background-color: $primary-background;
   color: $primary-colour;
-  padding: 5.25rem 1rem 0.75rem 1rem;
-
-  @include tablet {
-    padding-top: 5.75rem;
-  }
-
-  @include desktop {
-    padding-top: 6.75rem;
-  }
 
   &__wrapper {
-    @include desktop {
-      max-width: $wrapper-maxwidth;
-      margin: 0 auto;
-    }
+    @include wrapper;
   }
 
   &__title {

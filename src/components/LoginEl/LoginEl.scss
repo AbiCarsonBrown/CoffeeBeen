@@ -1,0 +1,9 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.log-in {
+  @include card;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: none;
+}

@@ -1,0 +1,28 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.sign-in {
+  color: $primary-colour;
+
+  &__wrapper {
+    @include wrapper;
+  }
+
+  &__buttons {
+    @include flex(row, space-between, center);
+  }
+
+  &__button {
+    @include card;
+    width: 50%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+    box-shadow: 1px 0 rgba(89, 75, 71, 0.5);
+
+    &--deselect {
+      background-color: $deselect-background;
+      border-bottom: 0.25px solid rgba(89, 75, 71, 0.5);
+    }
+  }
+}
