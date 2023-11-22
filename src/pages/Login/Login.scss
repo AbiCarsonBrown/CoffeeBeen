@@ -3,6 +3,7 @@
 
 .sign-in {
   color: $primary-colour;
+  height: 100vh;
 
   &__wrapper {
     @include wrapper;

@@ -1,16 +1,17 @@
 import "./Footer.scss";
 import user from "../../assets/icons/user-solid.svg";
-import list from "../../assets/icons/list-ul-solid.svg";
 import marker from "../../assets/icons/marker-pink.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 export default function Footer() {
+  const location = useLocation();
+
   return (
-    <footer className="footer">
+    <footer
+      className={`footer ${
+        location.pathname === "/login" ? "footer--hide" : ""
+      }`}>
       <nav className="footer__nav">
-        <button className="footer__list-button">
-          <img src={list} alt="" className="footer__list-img" />
-        </button>
         <NavLink to="/">
           <img src={marker} alt="" className="footer__marker" />
         </NavLink>

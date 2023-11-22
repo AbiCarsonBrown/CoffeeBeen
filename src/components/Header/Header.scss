@@ -50,11 +50,19 @@
     @include desktop {
       @include flex(row, flex-end, center);
     }
+
+    &--hide {
+      display: none;
+    }
   }
 
   &__list-button {
     background: none;
     border: none;
+
+    &--hide {
+      display: none;
+    }
   }
 
   &__list-img {
