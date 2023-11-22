@@ -16,13 +16,21 @@
     @include flex(row, space-between, center);
     width: 60%;
     margin: 0 auto;
+
+    @include tablet {
+      width: 50%;
+    }
   }
 
   &__marker {
     height: 3rem;
+
+    &--inactive {
+      background-color: white;
+    }
   }
 
   &__profile {
-    height: 3rem;
+    height: 2.8rem;
   }
 }

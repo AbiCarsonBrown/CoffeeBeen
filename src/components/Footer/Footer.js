@@ -1,7 +1,7 @@
 import "./Footer.scss";
-import user from "../../assets/icons/user-solid.svg";
-import marker from "../../assets/icons/marker-pink.svg";
+import { ReactComponent as Marker } from "../../assets/icons/marker.svg";
 import { NavLink, useLocation } from "react-router-dom";
+import { ReactComponent as User } from "../../assets/icons/user-icon.svg";
 
 export default function Footer() {
   const location = useLocation();
@@ -13,10 +13,24 @@ export default function Footer() {
       }`}>
       <nav className="footer__nav">
         <NavLink to="/">
-          <img src={marker} alt="" className="footer__marker" />
+          {location.pathname === "/" && (
+            <Marker
+              fill="#f6236b"
+              stroke="#f6236b"
+              className="footer__marker"
+            />
+          )}
+          {location.pathname !== "/" && (
+            <Marker fill="white" stroke="white" className="footer__marker" />
+          )}
         </NavLink>
         <NavLink to="/profile">
-          <img src={user} alt="" className="footer__profile" />
+          {location.pathname === "/profile" && (
+            <User fill="#f6236b" stroke="#f6236b" className="footer__profile" />
+          )}
+          {location.pathname !== "/profile" && (
+            <User fill="white" stroke="white" className="footer__profile" />
+          )}
         </NavLink>
       </nav>
     </footer>

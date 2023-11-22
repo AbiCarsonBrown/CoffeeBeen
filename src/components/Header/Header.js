@@ -1,7 +1,7 @@
 import "./Header.scss";
-import logo from "../../assets/icons/marker-pink.svg";
-import user from "../../assets/icons/user-solid.svg";
-import list from "../../assets/icons/list-ul-solid.svg";
+import logo from "../../assets/icons/marker.svg";
+import user from "../../assets/icons/user-icon.svg";
+import list from "../../assets/icons/list-icon.svg";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 export default function Header() {

@@ -85,7 +85,9 @@ export default function Map() {
   return (
     <>
       {!isLoaded || !coffeeShops ? (
-        <h1>Loading...</h1>
+        <main>
+          <h1>Loading...</h1>
+        </main>
       ) : (
         <GoogleMap
           mapContainerClassName="map-container"
