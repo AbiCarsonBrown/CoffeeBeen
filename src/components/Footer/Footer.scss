@@ -1,0 +1,10 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.footer {
+  @include header-footer;
+}
+
+.user {
+  height: 3rem;
+}

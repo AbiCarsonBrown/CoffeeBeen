@@ -20,14 +20,6 @@ export default function Map() {
   // useMemo?
   // recentre when coffeeshop clicked
 
-  const customMarker = {
-    path: { marker },
-    fillOpacity: 2,
-    strokeWeight: 1,
-    rotation: 0,
-    scale: 0.25,
-  };
-
   const getCoffeeShops = async () => {
     try {
       const { data } = await fetchCoffeeShops();

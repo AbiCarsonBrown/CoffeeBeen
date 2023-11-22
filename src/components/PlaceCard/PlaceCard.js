@@ -8,8 +8,8 @@ export default function PlaceCard({ place }) {
         {place.coffeeshop_name}
       </Link>
       <p>{place.address}</p>
-      // visited indicator, hightlighted if user has visited // wishlist
-      indicator, highlighted if on user wishlist
+      {/* visited indicator, hightlighted if user has visited, wishlist
+      indicator, highlighted if on user wishlist */}
     </article>
   );
 }

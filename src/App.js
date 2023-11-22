@@ -5,6 +5,7 @@ import CoffeeShop from "./pages/CoffeeShop/CoffeeShop";
 import Header from "./components/Header/Header";
 import Profile from "./pages/Profile/Profile";
 import Login from "./pages/Login/Login";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

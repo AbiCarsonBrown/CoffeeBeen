@@ -2,21 +2,7 @@
 @use "../../styles/partials/variables" as *;
 
 .header {
-  position: fixed;
-  width: 100%;
-  background-color: $primary-colour;
-  z-index: 1;
-  height: 4.5rem;
-  padding: 0.75rem;
-
-  @include tablet {
-    height: 5rem;
-    padding: 1rem 1.25rem;
-  }
-
-  @include desktop {
-    height: 6rem;
-  }
+  @include header-footer;
 
   &__wrapper {
     @include flex(row, center, center);

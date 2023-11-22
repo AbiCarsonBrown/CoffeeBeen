@@ -39,3 +39,21 @@
   border: 0.25px solid rgba(89, 75, 71, 0.5);
   box-shadow: 1px 1px rgba(89, 75, 71, 0.5);
 }
+
+@mixin header-footer {
+  position: fixed;
+  width: 100%;
+  background-color: $primary-colour;
+  z-index: 1;
+  height: 4.5rem;
+  padding: 0.75rem;
+
+  @include tablet {
+    height: 5rem;
+    padding: 1rem 1.25rem;
+  }
+
+  @include desktop {
+    height: 6rem;
+  }
+}
