@@ -12,11 +12,11 @@ main {
   @include tablet {
     height: calc(100vh - 5rem);
     padding-top: 5.75rem;
-    padding-bottom: 5rem;
   }
 
   @include desktop {
-    height: calc(100vh - 6rem);
+    height: 100vh;
     padding-top: 6.75rem;
+    padding-bottom: 0;
   }
 }

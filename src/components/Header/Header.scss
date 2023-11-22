@@ -14,11 +14,12 @@
 
     @include desktop {
       max-width: $wrapper-maxwidth;
+      justify-content: space-between;
       margin: 0 auto;
     }
   }
 
-  &__link {
+  &__logo-link {
     @include flex(row, flex-start, center);
     text-decoration: none;
   }
@@ -41,5 +42,27 @@
     @include desktop {
       font-size: 2rem;
     }
+  }
+
+  &__nav {
+    display: none;
+
+    @include desktop {
+      @include flex(row, flex-end, center);
+    }
+  }
+
+  &__list-button {
+    background: none;
+    border: none;
+  }
+
+  &__list-img {
+    height: 3rem;
+  }
+
+  &__profile {
+    height: 3rem;
+    margin-left: 2rem;
   }
 }

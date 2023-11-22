@@ -1,9 +1,11 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
 .map-container {
   height: calc(100vh - 4.5rem);
   width: 100%;
-}
 
-.not-visited__marker {
-  height: 1rem;
-  width: 1rem;
+  @include desktop {
+    height: 100vh;
+  }
 }

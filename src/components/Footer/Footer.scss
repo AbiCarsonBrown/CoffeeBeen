@@ -3,8 +3,31 @@
 
 .footer {
   @include header-footer;
-}
 
-.user {
-  height: 3rem;
+  @include desktop {
+    display: none;
+  }
+
+  &__nav {
+    @include flex(row, space-between, center);
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  &__list-button {
+    background: none;
+    border: none;
+  }
+
+  &__list-img {
+    height: 3rem;
+  }
+
+  &__marker {
+    height: 3rem;
+  }
+
+  &__profile {
+    height: 3rem;
+  }
 }
