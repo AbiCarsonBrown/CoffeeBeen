@@ -12,4 +12,11 @@ const logIn = async (user) => await axios.post(`${baseUrl}/auth/login`, user);
 const register = async (user) =>
   await axios.post(`${baseUrl}/auth/register`, user);
 
-export { fetchCoffeeShops, fetchCoffeeShop, logIn, register };
+const fetchUser = async (token) =>
+  await axios.get(`${baseUrl}/profile`, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export { fetchCoffeeShops, fetchCoffeeShop, logIn, register, fetchUser };
