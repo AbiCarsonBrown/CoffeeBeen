@@ -1,4 +1,21 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
 .place-list {
-  z-index: 3;
   position: absolute;
+  z-index: 2;
+  top: 4.5rem;
+  right: 0;
+  width: 100%;
+  height: calc(100vh - 9rem);
+  overflow: scroll;
+  background-color: white;
+
+  @include tablet {
+    top: 5rem;
+  }
+
+  @include desktop {
+    top: 6rem;
+  }
 }

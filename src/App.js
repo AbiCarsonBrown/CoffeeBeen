@@ -19,7 +19,12 @@ function App() {
       <BrowserRouter>
         <Header handleShowList={handleShowList} />
         <Routes>
-          <Route path="/" element={<Home showList={showList} />} />
+          <Route
+            path="/"
+            element={
+              <Home showList={showList} handleShowList={handleShowList} />
+            }
+          />
           <Route path="/places" element={<Navigate to="/" />} />
           <Route path="/places/:coffeeShopId" element={<CoffeeShop />} />
           <Route path="/profile" element={<Profile />} />

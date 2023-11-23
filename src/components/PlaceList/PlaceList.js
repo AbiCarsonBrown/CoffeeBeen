@@ -7,7 +7,7 @@ export default function PlaceList({ places, handleClose }) {
       <button onClick={handleClose}>X</button>
       <p>PLACE LIST</p>
       {places.map((place) => {
-        return <PlaceCard key={place.id} place={place} />;
+        return <PlaceCard key={place.coffeeshop_id} place={place} />;
       })}
     </section>
   );

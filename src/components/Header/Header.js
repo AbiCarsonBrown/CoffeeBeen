@@ -19,7 +19,7 @@ export default function Header({ handleShowList }) {
           <h2 className="header__title">CoffeeBeen</h2>
         </NavLink>
         <button
-          onClick={() => handleShowList}
+          onClick={() => handleShowList()}
           className={`header__list-button ${
             location.pathname !== "/" ? "header__list-button--hide" : ""
           }`}>

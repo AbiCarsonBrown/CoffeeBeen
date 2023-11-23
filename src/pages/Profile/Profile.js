@@ -1,7 +1,7 @@
 import "./Profile.scss";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { fetchUser } from "../../utils/axios";
+import { fetchUser, fetchUserVisits } from "../../utils/axios";
 import PlaceList from "../../components/PlaceList/PlaceList";
 
 export default function Profile() {
@@ -14,9 +14,10 @@ export default function Profile() {
 
   const login = async () => {
     try {
-      const { data } = await fetchUser(token);
-      setUser(data[0]);
-      setVisits(data[1]);
+      const userResponse = await fetchUser(token);
+      const visitsResponse = await fetchUserVisits(token);
+      setUser(userResponse.data);
+      setVisits(visitsResponse.data);
       setIsLoading(false);
       setFailedAuth(false);
     } catch (error) {
@@ -74,9 +75,6 @@ export default function Profile() {
       {show === "wishlist" && (
         <PlaceList places={wishlist} handleClose={handleClose} />
       )}
-      {/* list of visited coffee shops */}
-      {/* coffee shop wishlist */}
-      {/* on each list item, the option to add to "been" or wishlist and add/edit review & rating */}
     </main>
   );
 }
