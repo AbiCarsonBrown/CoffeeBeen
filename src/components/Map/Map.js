@@ -1,18 +1,26 @@
+import "./Map.scss";
+import visitedPin from "../../assets/icons/marker-visited.svg";
+import notVisitedPin from "../../assets/icons/marker-not-visited.svg";
+
 import {
   GoogleMap,
   InfoWindowF,
   MarkerF,
   useLoadScript,
 } from "@react-google-maps/api";
-import marker from "../../assets/icons/marker-brown.svg";
-import "./Map.scss";
 import { useEffect, useState } from "react";
-import { fetchCoffeeShops } from "../../utils/axios";
+import { fetchCoffeeShops, fetchUser } from "../../utils/axios";
 import { Link } from "react-router-dom";
 
 export default function Map() {
   const [coffeeShops, setCoffeeShops] = useState(null);
   const [isOpen, setIsOpen] = useState(null);
+  const [userVisited, setUserVisited] = useState(null);
+  const token = localStorage.getItem("token");
+  let visitedIds = null;
+  let visitedPlaces = null;
+  let notVisited = null;
+
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
@@ -29,9 +37,27 @@ export default function Map() {
     }
   };
 
+  const getUserVisits = async () => {
+    try {
+      const { data } = await fetchUser(token);
+      setUserVisited(data[1].filter((visit) => visit.visited));
+    } catch (error) {
+      setUserVisited(null);
+    }
+  };
+
   useEffect(() => {
     getCoffeeShops();
+    getUserVisits();
   }, []);
+
+  if (userVisited) {
+    visitedIds = userVisited.map((place) => place.coffeeshop_id);
+    visitedPlaces = coffeeShops.filter((place) =>
+      visitedIds.includes(place.id)
+    );
+    notVisited = coffeeShops.filter((place) => !visitedIds.includes(place.id));
+  }
 
   const handleInfoOpen = (id) => {
     setIsOpen(id);
@@ -85,33 +111,75 @@ export default function Map() {
   return (
     <>
       {!isLoaded || !coffeeShops ? (
-        <main>
-          <h1>Loading...</h1>
-        </main>
+        <h1>Loading...</h1>
       ) : (
         <GoogleMap
           mapContainerClassName="map-container"
           center={center}
           options={options}
           zoom={14}>
-          {coffeeShops.map(({ id, coffeeshop_name, latitude, longitude }) => {
-            return (
-              <MarkerF
-                key={id}
-                icon={marker}
-                position={{
-                  lat: Number(latitude),
-                  lng: Number(longitude),
-                }}
-                onClick={() => handleInfoOpen(id)}>
-                {isOpen === id && (
-                  <InfoWindowF>
-                    <Link to={`/coffeeshop/${id}`}>{coffeeshop_name}</Link>
-                  </InfoWindowF>
-                )}
-              </MarkerF>
-            );
-          })}
+          {!visitedPlaces &&
+            coffeeShops.map(({ id, coffeeshop_name, latitude, longitude }) => {
+              return (
+                <MarkerF
+                  key={id}
+                  icon={notVisitedPin}
+                  height="50rem"
+                  position={{
+                    lat: Number(latitude),
+                    lng: Number(longitude),
+                  }}
+                  onClick={() => handleInfoOpen(id)}>
+                  {isOpen === id && (
+                    <InfoWindowF>
+                      <Link to={`/coffeeshop/${id}`}>{coffeeshop_name}</Link>
+                    </InfoWindowF>
+                  )}
+                </MarkerF>
+              );
+            })}
+          {visitedPlaces &&
+            visitedPlaces.map(
+              ({ id, coffeeshop_name, latitude, longitude }) => {
+                return (
+                  <MarkerF
+                    key={id}
+                    icon={visitedPin}
+                    height="50rem"
+                    position={{
+                      lat: Number(latitude),
+                      lng: Number(longitude),
+                    }}
+                    onClick={() => handleInfoOpen(id)}>
+                    {isOpen === id && (
+                      <InfoWindowF>
+                        <Link to={`/coffeeshop/${id}`}>{coffeeshop_name}</Link>
+                      </InfoWindowF>
+                    )}
+                  </MarkerF>
+                );
+              }
+            )}
+          {notVisited &&
+            notVisited.map(({ id, coffeeshop_name, latitude, longitude }) => {
+              return (
+                <MarkerF
+                  key={id}
+                  icon={notVisitedPin}
+                  height="50rem"
+                  position={{
+                    lat: Number(latitude),
+                    lng: Number(longitude),
+                  }}
+                  onClick={() => handleInfoOpen(id)}>
+                  {isOpen === id && (
+                    <InfoWindowF>
+                      <Link to={`/coffeeshop/${id}`}>{coffeeshop_name}</Link>
+                    </InfoWindowF>
+                  )}
+                </MarkerF>
+              );
+            })}
         </GoogleMap>
       )}
     </>

@@ -1,15 +1,4 @@
-@use "../../styles/partials/mixins" as *;
-@use "../../styles/partials/variables" as *;
-
 .map-container {
-  height: calc(100vh - 4.5rem);
+  height: 100%;
   width: 100%;
-
-  @include tablet {
-    height: calc(100vh - 5rem);
-  }
-
-  @include desktop {
-    height: 100vh;
-  }
 }

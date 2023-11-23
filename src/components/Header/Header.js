@@ -4,12 +4,11 @@ import { ReactComponent as User } from "../../assets/icons/user-icon.svg";
 import { ReactComponent as List } from "../../assets/icons/list-icon.svg";
 import { NavLink, useLocation } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ handleShowList }) {
   const location = useLocation();
 
   return (
     <header className="header">
-      {/* <div className="header__wrapper"> */}
       <nav className="header__nav">
         <NavLink to="/" className="header__logo-link">
           <Marker
@@ -20,6 +19,7 @@ export default function Header() {
           <h2 className="header__title">CoffeeBeen</h2>
         </NavLink>
         <button
+          onClick={() => handleShowList}
           className={`header__list-button ${
             location.pathname !== "/" ? "header__list-button--hide" : ""
           }`}>
@@ -47,7 +47,6 @@ export default function Header() {
           )}
         </NavLink>
       </nav>
-      {/* </div> */}
     </header>
   );
 }
