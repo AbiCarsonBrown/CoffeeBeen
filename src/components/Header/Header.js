@@ -1,34 +1,53 @@
 import "./Header.scss";
-import logo from "../../assets/icons/marker.svg";
-import user from "../../assets/icons/user-icon.svg";
-import list from "../../assets/icons/list-icon.svg";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { ReactComponent as Marker } from "../../assets/icons/marker.svg";
+import { ReactComponent as User } from "../../assets/icons/user-icon.svg";
+import { ReactComponent as List } from "../../assets/icons/list-icon.svg";
+import { NavLink, useLocation } from "react-router-dom";
 
 export default function Header() {
   const location = useLocation();
 
   return (
     <header className="header">
-      <div className="header__wrapper">
-        <Link to="/" className="header__logo-link">
-          <img src={logo} alt="CoffeeBeen logo" className="header__logo" />
+      {/* <div className="header__wrapper"> */}
+      <nav className="header__nav">
+        <NavLink to="/" className="header__logo-link">
+          <Marker
+            fill="#f6236b"
+            stroke="#f6236b"
+            className="header__logo-icon"
+          />
           <h2 className="header__title">CoffeeBeen</h2>
-        </Link>
+        </NavLink>
         <button
           className={`header__list-button ${
             location.pathname !== "/" ? "header__list-button--hide" : ""
           }`}>
-          <img src={list} alt="" className="header__list-img" />
+          <List fill="white" stroke="white" className="header__list-icon" />
         </button>
-        <nav
-          className={`header__nav ${
-            location.pathname === "/login" ? "header__nav--hide" : ""
+
+        <NavLink
+          to="/profile"
+          className={`header__profile-link ${
+            location.pathname === "/login" ? "header__profile-link--hide" : ""
           }`}>
-          <NavLink to="/profile">
-            <img src={user} alt="" className="header__profile" />
-          </NavLink>
-        </nav>
-      </div>
+          {location.pathname === "/profile" && (
+            <User
+              fill="#f6236b"
+              stroke="#f6236b"
+              className="header__profile-icon"
+            />
+          )}
+          {location.pathname !== "/profile" && (
+            <User
+              fill="white"
+              stroke="white"
+              className="header__profile-icon"
+            />
+          )}
+        </NavLink>
+      </nav>
+      {/* </div> */}
     </header>
   );
 }

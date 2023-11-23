@@ -1,7 +1,7 @@
 import "./Footer.scss";
 import { ReactComponent as Marker } from "../../assets/icons/marker.svg";
-import { NavLink, useLocation } from "react-router-dom";
 import { ReactComponent as User } from "../../assets/icons/user-icon.svg";
+import { NavLink, useLocation } from "react-router-dom";
 
 export default function Footer() {
   const location = useLocation();
