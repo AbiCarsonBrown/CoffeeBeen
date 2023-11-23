@@ -12,8 +12,8 @@ const logIn = async (user) => await axios.post(`${baseUrl}/auth/login`, user);
 const register = async (user) =>
   await axios.post(`${baseUrl}/auth/register`, user);
 
-const fetchUser = async (token) =>
-  await axios.get(`${baseUrl}/profile`, {
+const fetchUser = (token) =>
+  axios.get(`${baseUrl}/profile`, {
     headers: {
       Authorization: "Bearer " + token,
     },

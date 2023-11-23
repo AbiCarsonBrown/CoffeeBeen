@@ -48,7 +48,9 @@ export default function Map() {
 
   useEffect(() => {
     getCoffeeShops();
-    getUserVisits();
+    if (token) {
+      getUserVisits();
+    }
   }, []);
 
   if (userVisited) {

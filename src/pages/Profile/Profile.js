@@ -1,15 +1,15 @@
 import "./Profile.scss";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { fetchUser } from "../../utils/axios";
 import PlaceList from "../../components/PlaceList/PlaceList";
 
 export default function Profile() {
   const [isLoading, setIsLoading] = useState(true);
+  const [failedAuth, setFailedAuth] = useState(false);
   const [user, setUser] = useState(null);
   const [visits, setVisits] = useState(null);
   const [show, setShow] = useState(null);
-  const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   const login = async () => {
@@ -18,9 +18,9 @@ export default function Profile() {
       setUser(data[0]);
       setVisits(data[1]);
       setIsLoading(false);
+      setFailedAuth(false);
     } catch (error) {
-      console.error(error);
-      navigate("/login");
+      setFailedAuth(true);
     }
   };
 
@@ -29,11 +29,13 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    login();
+    if (token) {
+      login();
+    }
   }, []);
 
-  if (!token) {
-    return navigate("/login");
+  if (!token || failedAuth) {
+    return <Navigate to="/login" />;
   }
 
   if (isLoading) {
