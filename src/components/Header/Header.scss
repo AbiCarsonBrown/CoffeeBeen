@@ -7,18 +7,18 @@
   &__nav {
     width: 100%;
     display: grid;
-    grid-template-columns: 20% 60% 20%;
+    grid-template-columns: 20% 60% 10% 10%;
     align-items: center;
 
     @include tablet {
-      grid-template-columns: 80% 20%;
+      grid-template-columns: 80% 10% 5% 5%;
       max-width: $wrapper-maxwidth;
       padding: 0 2rem;
       margin: 0 auto;
     }
 
     @include desktop {
-      grid-template-columns: 80% 10% 10%;
+      grid-template-columns: 70% 10% 10% 10%;
       padding: 0;
     }
   }
@@ -99,5 +99,18 @@
     &-icon {
       height: 2.8rem;
     }
+  }
+
+  &__login {
+    grid-column: 4;
+    text-decoration: none;
+    color: white;
+  }
+
+  &__logout {
+    grid-column: 4;
+    background: none;
+    border: none;
+    color: white;
   }
 }

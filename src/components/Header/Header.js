@@ -6,6 +6,11 @@ import { NavLink, useLocation } from "react-router-dom";
 
 export default function Header({ handleShowList }) {
   const location = useLocation();
+  const token = localStorage.getItem("token");
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
 
   return (
     <header className="header">
@@ -46,6 +51,17 @@ export default function Header({ handleShowList }) {
             />
           )}
         </NavLink>
+
+        {!token && (
+          <NavLink to="/login" className="header__login">
+            Log In
+          </NavLink>
+        )}
+        {token && (
+          <button onClick={handleLogOut} className="header__logout">
+            Log Out
+          </button>
+        )}
       </nav>
     </header>
   );
