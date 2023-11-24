@@ -21,9 +21,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              <Home showList={showList} handleShowList={handleShowList} />
-            }
+            element={<Home showList={showList} setShowList={setShowList} />}
           />
           <Route path="/places" element={<Navigate to="/" />} />
           <Route path="/places/:coffeeShopId" element={<CoffeeShop />} />

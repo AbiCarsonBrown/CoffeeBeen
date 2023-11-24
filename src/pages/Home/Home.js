@@ -4,7 +4,7 @@ import PlaceList from "../../components/PlaceList/PlaceList";
 import { useEffect, useState } from "react";
 import { fetchCoffeeShops, fetchUserVisits } from "../../utils/axios";
 
-export default function Home({ showList, handleShowList }) {
+export default function Home({ showList, setShowList }) {
   const [coffeeShops, setCoffeeShops] = useState(null);
   const [userVisits, setUserVisits] = useState(null);
   const token = localStorage.getItem("token");
@@ -29,6 +29,7 @@ export default function Home({ showList, handleShowList }) {
 
   useEffect(() => {
     getCoffeeShops();
+    setShowList(false);
     if (token) {
       getUserVisits();
     }
@@ -42,10 +43,24 @@ export default function Home({ showList, handleShowList }) {
     <main className="home">
       <Map coffeeShops={coffeeShops} userVisits={userVisits} />
       {userVisits && showList && (
-        <PlaceList places={userVisits} handleClose={handleShowList} />
+        <PlaceList
+          places={userVisits}
+          handleClose={() => {
+            setShowList(false);
+          }}
+          getCoffeeShops={getCoffeeShops}
+          getUserVisits={getUserVisits}
+        />
       )}
       {!userVisits && showList && (
-        <PlaceList places={coffeeShops} handleClose={handleShowList} />
+        <PlaceList
+          places={coffeeShops}
+          handleClose={() => {
+            setShowList(false);
+          }}
+          getCoffeeShops={getCoffeeShops}
+          getUserVisits={getUserVisits}
+        />
       )}
     </main>
   );

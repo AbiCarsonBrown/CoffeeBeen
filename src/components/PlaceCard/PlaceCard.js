@@ -6,7 +6,7 @@ import "@smastrom/react-rating/style.css";
 import { postUserVisit, editUserVisit } from "../../utils/axios";
 import { markerPath } from "../../utils/markerPath";
 
-export default function PlaceCard({ place }) {
+export default function PlaceCard({ place, getCoffeeShops, getUserVisits }) {
   const [bookmark, setBookmark] = useState(place.on_wishlist);
   const [visited, setVisited] = useState(place.visited);
   const token = localStorage.getItem("token");
@@ -45,12 +45,16 @@ export default function PlaceCard({ place }) {
     if (!place.visit_id) {
       try {
         postUserVisit(token, visit);
+        getCoffeeShops();
+        getUserVisits();
       } catch (error) {
         console.error(error);
       }
     } else {
       try {
         editUserVisit(token, visit);
+        getCoffeeShops();
+        getUserVisits();
       } catch (error) {
         console.error(error);
       }
