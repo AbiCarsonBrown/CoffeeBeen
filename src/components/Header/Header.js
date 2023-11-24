@@ -52,12 +52,12 @@ export default function Header({ handleShowList }) {
           )}
         </NavLink>
 
-        {!token && (
+        {!token && location.pathname !== "/login" && (
           <NavLink to="/login" className="header__login">
             Log In
           </NavLink>
         )}
-        {token && (
+        {token && location.pathname !== "/login" && (
           <button onClick={handleLogOut} className="header__logout">
             Log Out
           </button>
