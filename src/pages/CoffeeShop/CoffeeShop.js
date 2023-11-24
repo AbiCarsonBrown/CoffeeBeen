@@ -26,6 +26,7 @@ export default function CoffeeShop() {
   const [seeReviews, setSeeReviews] = useState(true);
   const [bookmark, setBookmark] = useState(null);
   const [visited, setVisited] = useState(null);
+  const [failedAuth, setFailedAuth] = useState(false);
   const { coffeeShopId } = useParams();
   const token = localStorage.getItem("token");
   let visitCount = 0;
@@ -36,28 +37,63 @@ export default function CoffeeShop() {
   const getSingleUserVisit = async () => {
     try {
       const { data } = await fetchSingleUserVisit(token, coffeeShopId);
-      setUserVisit(data);
+      setUserVisit(data[0]);
+      setVisited(data[0].visited);
+      setBookmark(data[0].on_wishlist);
     } catch (error) {
       setUserVisit(null);
+      setVisited(null);
+      setBookmark(null);
+    }
+  };
+
+  const getCoffeeShop = async () => {
+    try {
+      const { data } = await fetchCoffeeShop(coffeeShopId);
+      setCoffeeShop(data[0][0]);
+      setVisits(data[1]);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
     }
   };
 
   useEffect(() => {
-    const getCoffeeShop = async () => {
-      try {
-        const { data } = await fetchCoffeeShop(coffeeShopId);
-        setCoffeeShop(data[0][0]);
-        setVisits(data[1]);
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     getCoffeeShop();
     if (token) {
       getSingleUserVisit();
     }
   }, [coffeeShopId]);
+
+  const submitVisit = (visited, wished, rating, review) => {
+    const visit = {
+      visit_id: userVisit.visit_id,
+      coffeeshop_id: userVisit.coffeeshop_id,
+      user_id: userVisit.user_id,
+      visited: visited,
+      on_wishlist: wished,
+      rating: rating,
+      review: review,
+    };
+
+    if (!userVisit.visit_id) {
+      try {
+        postUserVisit(token, visit);
+        getCoffeeShop();
+        getSingleUserVisit();
+      } catch (error) {
+        setFailedAuth(true);
+      }
+    } else {
+      try {
+        editUserVisit(token, visit);
+        getCoffeeShop();
+        getSingleUserVisit();
+      } catch (error) {
+        setFailedAuth(true);
+      }
+    }
+  };
 
   const handleVisit = (visitVal) => {
     setVisited(visitVal);
@@ -87,17 +123,22 @@ export default function CoffeeShop() {
     }
   };
 
+  const handleRating = (ratingVal) => {};
+
   if (isLoading || !visits) {
     return <p>Loading...</p>;
   }
 
   const reviews = visits
-    .map((visit, i) => ({
-      key: i,
+    .map((visit) => ({
+      key: visit.visit_id,
+      visit_id: visit.visit_id,
       user: visit.username,
+      visited: visit.visited,
+      rating: visit.rating,
       review: visit.review,
     }))
-    .filter((review) => review.review);
+    .filter((review) => (review.review || review.rating) && review.visited);
 
   visits.forEach((visit) => {
     visitCount += visit.visited;
@@ -130,7 +171,6 @@ export default function CoffeeShop() {
             </p>
           </div>
           <div className="coffeeshop__actions">
-            {" "}
             <Rating
               style={{ maxWidth: 50 }}
               value={visited}
@@ -162,8 +202,8 @@ export default function CoffeeShop() {
         </button>
         {seeReviews && (
           <div className="coffeeshop__reviews-list">
-            {reviews.map((review, i) => (
-              <ReviewCard key={i} user={review.user} review={review.review} />
+            {reviews.map((review) => (
+              <ReviewCard key={review.visit_id} visit={review} />
             ))}
           </div>
         )}
