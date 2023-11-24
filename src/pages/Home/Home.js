@@ -7,6 +7,7 @@ import { fetchCoffeeShops, fetchUserVisits } from "../../utils/axios";
 export default function Home({ showList, setShowList }) {
   const [coffeeShops, setCoffeeShops] = useState(null);
   const [userVisits, setUserVisits] = useState(null);
+  const [isOpen, setIsOpen] = useState(null);
   const token = localStorage.getItem("token");
 
   const getCoffeeShops = async () => {
@@ -19,6 +20,7 @@ export default function Home({ showList, setShowList }) {
   };
 
   const getUserVisits = async () => {
+    setIsOpen(null);
     try {
       const { data } = await fetchUserVisits(token);
       setUserVisits(data);
@@ -41,7 +43,12 @@ export default function Home({ showList, setShowList }) {
 
   return (
     <main className="home">
-      <Map coffeeShops={coffeeShops} userVisits={userVisits} />
+      <Map
+        coffeeShops={coffeeShops}
+        userVisits={userVisits}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
       {userVisits && showList && (
         <PlaceList
           places={userVisits}

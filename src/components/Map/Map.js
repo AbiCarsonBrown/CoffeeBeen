@@ -10,9 +10,7 @@ import {
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Map({ coffeeShops, userVisits }) {
-  const [isOpen, setIsOpen] = useState(null);
-
+export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
