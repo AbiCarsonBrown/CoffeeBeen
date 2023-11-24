@@ -83,12 +83,6 @@ export default function CoffeeShop() {
               Visited by{" "}
               <span className="coffeeshop--highlight">{visitCount}</span> users
             </p>
-            {/* <Rating
-          style={{ maxWidth: 200 }}
-          value={rating}
-          onChange={setRating}
-          itemStyles={customCoffeeBean}
-        /> */}
           </div>
         </div>
         <button

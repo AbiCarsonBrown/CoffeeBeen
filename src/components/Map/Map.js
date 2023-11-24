@@ -126,7 +126,7 @@ export default function Map({ coffeeShops, userVisits }) {
                 onClick={() => handleInfoOpen(coffeeshop_id)}>
                 {isOpen === coffeeshop_id && (
                   <InfoWindowF>
-                    <Link to={`/coffeeshop/${coffeeshop_id}`}>
+                    <Link to={`/places/${coffeeshop_id}`}>
                       {coffeeshop_name}
                     </Link>
                   </InfoWindowF>

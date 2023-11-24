@@ -24,6 +24,20 @@ const fetchUserVisits = (token) =>
     },
   });
 
+const postUserVisit = (token, visit) =>
+  axios.post(`${baseUrl}/profile/visits`, visit, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+const editUserVisit = (token, visit) =>
+  axios.put(`${baseUrl}/profile/visits`, visit, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
 export {
   fetchCoffeeShops,
   fetchCoffeeShop,
@@ -31,4 +45,6 @@ export {
   register,
   fetchUser,
   fetchUserVisits,
+  postUserVisit,
+  editUserVisit,
 };
