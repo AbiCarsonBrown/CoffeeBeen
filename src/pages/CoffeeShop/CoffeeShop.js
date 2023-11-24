@@ -3,29 +3,43 @@ import { fetchCoffeeShop } from "../../utils/axios";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
+import {
+  customMarker,
+  customBookmark,
+  customCoffeeBean,
+} from "../../utils/customIcons";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import { ReactComponent as ChevronDown } from "../../assets/icons/chevron-down.svg";
+import { ReactComponent as ChevronUp } from "../../assets/icons/chevron-up.svg";
+import {
+  postUserVisit,
+  editUserVisit,
+  fetchSingleUserVisit,
+} from "../../utils/axios";
 
 export default function CoffeeShop() {
   const [coffeeShop, setCoffeeShop] = useState(null);
   const [visits, setVisits] = useState(null);
+  const [userVisit, setUserVisit] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [seeReviews, setSeeReviews] = useState(false);
+  const [seeReviews, setSeeReviews] = useState(true);
+  const [bookmark, setBookmark] = useState(null);
+  const [visited, setVisited] = useState(null);
   const { coffeeShopId } = useParams();
+  const token = localStorage.getItem("token");
   let visitCount = 0;
   let totalRating = 0;
   let ratingCount = 0;
   let averageRating = 0;
 
-  const customCoffeeBean = {
-    itemShapes: (
-      <path d="M 40.121094 1.0625 C 54.996094 -3.316406 66.90625 10.628906 72.296875 23.054688 C 77.667969 35.449219 78.472656 49.660156 76.035156 62.847656 C 73.121094 78.59375 61.121094 106.933594 40.730469 101.222656 C 37.015625 92.839844 35.203125 84.394531 35.335938 76.007812 C 35.476562 67.457031 37.59375 61.484375 39.839844 55.160156 C 41.761719 49.75 43.746094 44.15625 44.683594 36.578125 C 46.082031 25.273438 44.546875 13.363281 40.121094 1.0625 Z M 1.921875 62.847656 C 4.84375 78.648438 16.917969 107.125 37.4375 101.160156 C 33.914062 92.796875 32.207031 84.359375 32.339844 75.960938 C 32.484375 66.917969 34.6875 60.71875 37.015625 54.15625 C 38.882812 48.898438 40.8125 43.460938 41.710938 36.210938 C 43.097656 24.984375 41.453125 13.101562 36.828125 0.789062 C 22.421875 -2.6875 10.925781 10.910156 5.660156 23.054688 C 0.285156 35.449219 -0.519531 49.660156 1.921875 62.847656 Z M 1.921875 62.847656 " />
-    ),
-    itemStrokeWidth: 1,
-    activeFillColor: "#f6236b",
-    activeStrokeColor: "#E8B4B8",
-    inactiveFillColor: "#E8B4B8",
-    inactiveStrokeColor: "#f6236b",
+  const getSingleUserVisit = async () => {
+    try {
+      const { data } = await fetchSingleUserVisit(token, coffeeShopId);
+      setUserVisit(data);
+    } catch (error) {
+      setUserVisit(null);
+    }
   };
 
   useEffect(() => {
@@ -40,7 +54,38 @@ export default function CoffeeShop() {
       }
     };
     getCoffeeShop();
+    if (token) {
+      getSingleUserVisit();
+    }
   }, [coffeeShopId]);
+
+  const handleVisit = (visitVal) => {
+    setVisited(visitVal);
+    if (token) {
+      submitVisit(
+        visitVal,
+        userVisit.on_wishlist,
+        userVisit.rating,
+        userVisit.review
+      );
+    } else {
+      setFailedAuth(true);
+    }
+  };
+
+  const handleBookmark = (bookmarkVal) => {
+    setBookmark(bookmarkVal);
+    if (token) {
+      submitVisit(
+        userVisit.visited,
+        bookmarkVal,
+        userVisit.rating,
+        userVisit.review
+      );
+    } else {
+      setFailedAuth(true);
+    }
+  };
 
   if (isLoading || !visits) {
     return <p>Loading...</p>;
@@ -84,6 +129,27 @@ export default function CoffeeShop() {
               <span className="coffeeshop--highlight">{visitCount}</span> users
             </p>
           </div>
+          <div className="coffeeshop__actions">
+            {" "}
+            <Rating
+              style={{ maxWidth: 50 }}
+              value={visited}
+              onChange={handleVisit}
+              itemStyles={customMarker}
+              spaceBetween="none"
+              spaceInside="none"
+              items={1}
+            />
+            <Rating
+              style={{ maxWidth: 50 }}
+              value={bookmark}
+              onChange={handleBookmark}
+              itemStyles={customBookmark}
+              spaceBetween="none"
+              spaceInside="none"
+              items={1}
+            />
+          </div>
         </div>
         <button
           onClick={() => {
@@ -91,6 +157,8 @@ export default function CoffeeShop() {
           }}
           className="coffeeshop__reviews">
           Reviews ({reviews.length})
+          {!seeReviews && <ChevronDown height="1rem" />}
+          {seeReviews && <ChevronUp height="1rem" />}
         </button>
         {seeReviews && (
           <div className="coffeeshop__reviews-list">

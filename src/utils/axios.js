@@ -38,6 +38,13 @@ const editUserVisit = (token, visit) =>
     },
   });
 
+const fetchSingleUserVisit = (token, coffeeshop_id) =>
+  axios.get(`${baseUrl}/profile/visits/${coffeeshop_id}`, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
 export {
   fetchCoffeeShops,
   fetchCoffeeShop,
@@ -47,4 +54,5 @@ export {
   fetchUserVisits,
   postUserVisit,
   editUserVisit,
+  fetchSingleUserVisit,
 };

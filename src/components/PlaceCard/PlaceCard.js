@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { postUserVisit, editUserVisit } from "../../utils/axios";
-import { markerPath, bookmarkPath } from "../../utils/SVGPaths";
+import { customMarker, customBookmark } from "../../utils/customIcons";
 
 export default function PlaceCard({
   place,
@@ -14,26 +14,7 @@ export default function PlaceCard({
 }) {
   const [bookmark, setBookmark] = useState(place.on_wishlist);
   const [visited, setVisited] = useState(place.visited);
-
   const token = localStorage.getItem("token");
-
-  const customMarker = {
-    itemShapes: markerPath,
-    itemStrokeWidth: 1,
-    activeFillColor: "#f6236b",
-    activeStrokeColor: "#E8B4B8",
-    inactiveFillColor: "#E8B4B8",
-    inactiveStrokeColor: "#f6236b",
-  };
-
-  const customBookmark = {
-    itemShapes: bookmarkPath,
-    itemStrokeWidth: 1,
-    activeFillColor: "#f6236b",
-    activeStrokeColor: "#E8B4B8",
-    inactiveFillColor: "#E8B4B8",
-    inactiveStrokeColor: "#f6236b",
-  };
 
   const submitVisit = (visited, wished, rating, review) => {
     const visit = {
