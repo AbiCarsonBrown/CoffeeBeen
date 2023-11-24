@@ -4,10 +4,21 @@ import { Link } from "react-router-dom";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { postUserVisit, editUserVisit } from "../../utils/axios";
+import { markerPath } from "../../utils/markerPath";
 
 export default function PlaceCard({ place }) {
   const [bookmark, setBookmark] = useState(place.on_wishlist);
+  const [visited, setVisited] = useState(place.visited);
   const token = localStorage.getItem("token");
+
+  const customMarker = {
+    itemShapes: markerPath,
+    itemStrokeWidth: 1,
+    activeFillColor: "#f6236b",
+    activeStrokeColor: "#E8B4B8",
+    inactiveFillColor: "#E8B4B8",
+    inactiveStrokeColor: "#f6236b",
+  };
 
   const customBookmark = {
     itemShapes: (
@@ -47,6 +58,11 @@ export default function PlaceCard({ place }) {
     // if noone logged in/expired token, display an error
   };
 
+  const handleVisit = (visitVal) => {
+    setVisited(visitVal);
+    submitVisit(visitVal, place.on_wishlist, place.rating, place.review);
+  };
+
   const handleBookmark = (bookmarkVal) => {
     setBookmark(bookmarkVal);
     submitVisit(place.visited, bookmarkVal, place.rating, place.review);
@@ -56,11 +72,17 @@ export default function PlaceCard({ place }) {
     <article className="place-card">
       <Link to={`/places/${place.coffeeshop_id}`}>{place.coffeeshop_name}</Link>
       <p>{place.address}</p>
-      {!!place.visited && <p>Visited</p>}
-      {!place.visited && <p>Not visited</p>}
-
       <Rating
-        style={{ maxWidth: 100 }}
+        style={{ maxWidth: 50 }}
+        value={visited}
+        onChange={handleVisit}
+        itemStyles={customMarker}
+        spaceBetween="none"
+        spaceInside="none"
+        items={1}
+      />
+      <Rating
+        style={{ maxWidth: 50 }}
         value={bookmark}
         onChange={handleBookmark}
         itemStyles={customBookmark}

@@ -52,7 +52,7 @@ export default function Login() {
       localStorage.setItem("token", response.data.token);
       setSuccess(true);
       setTimeout(() => {
-        navigate("/profile");
+        navigate("/");
       }, 1000);
     } catch (error) {
       console.error(error);
@@ -113,7 +113,7 @@ export default function Login() {
       localStorage.setItem("token", response.data.token);
       setSuccess(true);
       setTimeout(() => {
-        navigate("/profile");
+        navigate("/");
       }, 1000);
     } catch (error) {
       console.error(error);
