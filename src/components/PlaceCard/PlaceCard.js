@@ -4,11 +4,17 @@ import { Link } from "react-router-dom";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { postUserVisit, editUserVisit } from "../../utils/axios";
-import { markerPath } from "../../utils/markerPath";
+import { markerPath, bookmarkPath } from "../../utils/SVGPaths";
 
-export default function PlaceCard({ place, getCoffeeShops, getUserVisits }) {
+export default function PlaceCard({
+  place,
+  getCoffeeShops,
+  getUserVisits,
+  setFailedAuth,
+}) {
   const [bookmark, setBookmark] = useState(place.on_wishlist);
   const [visited, setVisited] = useState(place.visited);
+
   const token = localStorage.getItem("token");
 
   const customMarker = {
@@ -21,9 +27,7 @@ export default function PlaceCard({ place, getCoffeeShops, getUserVisits }) {
   };
 
   const customBookmark = {
-    itemShapes: (
-      <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" />
-    ),
+    itemShapes: bookmarkPath,
     itemStrokeWidth: 1,
     activeFillColor: "#f6236b",
     activeStrokeColor: "#E8B4B8",
@@ -48,7 +52,7 @@ export default function PlaceCard({ place, getCoffeeShops, getUserVisits }) {
         getCoffeeShops();
         getUserVisits();
       } catch (error) {
-        console.error(error);
+        setFailedAuth(true);
       }
     } else {
       try {
@@ -56,20 +60,27 @@ export default function PlaceCard({ place, getCoffeeShops, getUserVisits }) {
         getCoffeeShops();
         getUserVisits();
       } catch (error) {
-        console.error(error);
+        setFailedAuth(true);
       }
     }
-    // if noone logged in/expired token, display an error
   };
 
   const handleVisit = (visitVal) => {
     setVisited(visitVal);
-    submitVisit(visitVal, place.on_wishlist, place.rating, place.review);
+    if (token) {
+      submitVisit(visitVal, place.on_wishlist, place.rating, place.review);
+    } else {
+      setFailedAuth(true);
+    }
   };
 
   const handleBookmark = (bookmarkVal) => {
     setBookmark(bookmarkVal);
-    submitVisit(place.visited, bookmarkVal, place.rating, place.review);
+    if (token) {
+      submitVisit(place.visited, bookmarkVal, place.rating, place.review);
+    } else {
+      setFailedAuth(true);
+    }
   };
 
   return (

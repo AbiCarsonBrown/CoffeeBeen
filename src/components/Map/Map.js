@@ -17,8 +17,6 @@ export default function Map({ coffeeShops, userVisits }) {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
   const center = { lat: 51.507744, lng: -0.119071 };
-  // useMemo?
-  // recentre when coffeeshop clicked
 
   const handleInfoOpen = (id) => {
     setIsOpen(id);
