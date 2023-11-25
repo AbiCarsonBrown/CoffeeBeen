@@ -123,6 +123,24 @@
     }
   }
 
+  &__review-form {
+    @include card;
+    height: 10rem;
+    margin-top: 1rem;
+
+    @include tablet {
+      width: 16.75rem;
+      height: 11.5rem;
+    }
+
+    @include desktop {
+      width: 15rem;
+      height: 14rem;
+      margin-right: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+
   &--highlight {
     color: $highlight-colour;
   }

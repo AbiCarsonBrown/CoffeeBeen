@@ -1,5 +1,6 @@
 import "./CoffeeShop.scss";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
+import ReviewForm from "../../components/ReviewForm/ReviewForm";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ReactComponent as ChevronDown } from "../../assets/icons/chevron-down.svg";
@@ -63,6 +64,9 @@ export default function CoffeeShop() {
     if (token) {
       getSingleUserVisit();
     }
+    if (!token) {
+      setFailedAuth(true);
+    }
   }, [coffeeShopId]);
 
   const submitVisit = (visited, wished, rating, review) => {
@@ -123,8 +127,6 @@ export default function CoffeeShop() {
     }
   };
 
-  const handleRating = (ratingVal) => {};
-
   if (isLoading || !visits) {
     return <p>Loading...</p>;
   }
@@ -132,23 +134,23 @@ export default function CoffeeShop() {
   const reviews =
     (!userVisit &&
       visits.filter(
-        (review) => (review.review || review.rating) && review.visited
+        (visit) => (visit.review || visit.rating) && visit.visited
       )) ||
     (userVisit &&
       visits.filter(
-        (review) =>
-          (review.review || review.rating) &&
-          review.visited &&
-          review.visit_id !== userVisit.visit_id
+        (visit) =>
+          (visit.review || visit.rating) &&
+          visit.visited &&
+          visit.visit_id !== userVisit.visit_id
       ));
 
   const userReview =
     userVisit &&
     visits.filter(
-      (review) =>
-        (review.review || review.rating) &&
-        review.visited &&
-        review.visit_id == userVisit.visit_id
+      (visit) =>
+        (visit.review || visit.rating) &&
+        visit.visited &&
+        visit.visit_id === userVisit.visit_id
     );
 
   visits.forEach((visit) => {
@@ -218,9 +220,25 @@ export default function CoffeeShop() {
         </button>
         {seeReviews && (
           <div className="coffeeshop__reviews-list">
-            {userReview && <ReviewCard visit={userReview[0]} />}
+            {!failedAuth && userReview[0] && (
+              <ReviewCard
+                review={userReview[0]}
+                isUser={true}
+                submitVisit={submitVisit}
+              />
+            )}
+            {!failedAuth && !userReview[0] && !!userVisit.visited && (
+              <article className="coffeeshop__review-form">
+                {/* <ReviewForm review={} submitVisit={submitVisit}/> */}
+              </article>
+            )}
             {reviews.map((review) => (
-              <ReviewCard key={review.visit_id} visit={review} />
+              <ReviewCard
+                key={review.visit_id}
+                review={review}
+                isUser={false}
+                submitVisit={submitVisit}
+              />
             ))}
           </div>
         )}
