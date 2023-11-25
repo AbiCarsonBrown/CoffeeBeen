@@ -1,32 +1,32 @@
 import "./CoffeeShop.scss";
-import { fetchCoffeeShop } from "../../utils/axios";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { ReactComponent as ChevronDown } from "../../assets/icons/chevron-down.svg";
+import { ReactComponent as ChevronUp } from "../../assets/icons/chevron-up.svg";
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
 import {
   customMarker,
   customBookmark,
   customCoffeeBean,
 } from "../../utils/customIcons";
-import { Rating } from "@smastrom/react-rating";
-import "@smastrom/react-rating/style.css";
-import { ReactComponent as ChevronDown } from "../../assets/icons/chevron-down.svg";
-import { ReactComponent as ChevronUp } from "../../assets/icons/chevron-up.svg";
 import {
+  fetchCoffeeShop,
   postUserVisit,
   editUserVisit,
   fetchSingleUserVisit,
 } from "../../utils/axios";
 
 export default function CoffeeShop() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [failedAuth, setFailedAuth] = useState(false);
+  const [seeReviews, setSeeReviews] = useState(true);
   const [coffeeShop, setCoffeeShop] = useState(null);
   const [visits, setVisits] = useState(null);
   const [userVisit, setUserVisit] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [seeReviews, setSeeReviews] = useState(true);
-  const [bookmark, setBookmark] = useState(null);
   const [visited, setVisited] = useState(null);
-  const [failedAuth, setFailedAuth] = useState(false);
+  const [bookmark, setBookmark] = useState(null);
   const { coffeeShopId } = useParams();
   const token = localStorage.getItem("token");
   let visitCount = 0;
@@ -129,16 +129,27 @@ export default function CoffeeShop() {
     return <p>Loading...</p>;
   }
 
-  const reviews = visits
-    .map((visit) => ({
-      key: visit.visit_id,
-      visit_id: visit.visit_id,
-      user: visit.username,
-      visited: visit.visited,
-      rating: visit.rating,
-      review: visit.review,
-    }))
-    .filter((review) => (review.review || review.rating) && review.visited);
+  const reviews =
+    (!userVisit &&
+      visits.filter(
+        (review) => (review.review || review.rating) && review.visited
+      )) ||
+    (userVisit &&
+      visits.filter(
+        (review) =>
+          (review.review || review.rating) &&
+          review.visited &&
+          review.visit_id !== userVisit.visit_id
+      ));
+
+  const userReview =
+    userVisit &&
+    visits.filter(
+      (review) =>
+        (review.review || review.rating) &&
+        review.visited &&
+        review.visit_id == userVisit.visit_id
+    );
 
   visits.forEach((visit) => {
     visitCount += visit.visited;
@@ -171,6 +182,11 @@ export default function CoffeeShop() {
             </p>
           </div>
           <div className="coffeeshop__actions">
+            {failedAuth && (
+              <p className="coffeeshop__error">
+                You must {<Link to="/login">log in</Link>} to use this feature.
+              </p>
+            )}
             <Rating
               style={{ maxWidth: 50 }}
               value={visited}
@@ -202,6 +218,7 @@ export default function CoffeeShop() {
         </button>
         {seeReviews && (
           <div className="coffeeshop__reviews-list">
+            {userReview && <ReviewCard visit={userReview[0]} />}
             {reviews.map((review) => (
               <ReviewCard key={review.visit_id} visit={review} />
             ))}
