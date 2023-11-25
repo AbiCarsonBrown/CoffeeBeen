@@ -23,8 +23,9 @@
 
   &__details {
     @include desktop {
-      @include flex(row, flex-start, flex-start);
-      padding-bottom: 1rem;
+      display: grid;
+      align-items: center;
+      margin: 1.25rem 0;
     }
   }
 
@@ -38,7 +39,8 @@
 
     @include desktop {
       width: 25rem;
-      padding-right: 3rem;
+      grid-column: 1;
+      padding-top: 0;
     }
   }
 
@@ -46,12 +48,17 @@
     display: grid;
     grid-template-columns: 50%;
     grid-template-rows: 50% 50%;
+    grid-column: 2;
     justify-content: space-between;
     align-items: center;
     margin-top: 1rem;
 
     @include tablet {
-      max-width: 900px;
+      max-width: 56rem;
+    }
+
+    @include desktop {
+      margin-top: 0;
     }
   }
 
@@ -59,6 +66,10 @@
     grid-column: 1;
     grid-row: 1;
     height: 1.5rem;
+
+    @include desktop {
+      height: 1.75rem;
+    }
   }
 
   &__visits {
@@ -85,6 +96,10 @@
     @include tablet {
       width: 8rem;
     }
+
+    @include desktop {
+      width: 9rem;
+    }
   }
 
   &__error {
@@ -107,6 +122,10 @@
     @include tablet {
       height: 3.5rem;
     }
+
+    @include desktop {
+      height: 4rem;
+    }
   }
 
   &__bookmark {
@@ -115,6 +134,10 @@
 
     @include tablet {
       height: 3.5rem;
+    }
+
+    @include desktop {
+      height: 4rem;
     }
   }
 

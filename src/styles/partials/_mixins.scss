@@ -101,6 +101,10 @@
   font-size: 0.75rem;
   text-align: center;
   font-style: italic;
+
+  @include desktop {
+    font-size: 0.875rem;
+  }
 }
 
 @mixin text-button {

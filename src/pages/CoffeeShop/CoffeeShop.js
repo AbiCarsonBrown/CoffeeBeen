@@ -171,7 +171,7 @@ export default function CoffeeShop() {
           <div className="coffeeshop__about">
             <Rating
               readOnly
-              style={{ maxWidth: 100 }}
+              style={{ maxWidth: 125 }}
               value={averageRating}
               itemStyles={customCoffeeBean}
               spaceBetween="none"
