@@ -25,9 +25,10 @@
 }
 
 @mixin wrapper {
-  @include desktop {
+  max-width: $mobile-maxwidth;
+  margin: 0 auto;
+  @include tablet {
     max-width: $wrapper-maxwidth;
-    margin: 0 auto;
   }
 }
 

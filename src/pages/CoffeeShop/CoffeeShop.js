@@ -185,41 +185,43 @@ export default function CoffeeShop() {
               </span>{" "}
               users
             </p>
-            {visitError && (
-              <p className="coffeeshop__error">
-                You must{" "}
-                {
-                  <Link to="/login" className="coffeeshop__error-link">
-                    log in
-                  </Link>
-                }{" "}
-                to use this feature.
-              </p>
-            )}
-            {!visitError && (
-              <>
-                <Rating
-                  style={{ maxWidth: 50 }}
-                  value={visited}
-                  onChange={handleVisit}
-                  itemStyles={customMarker}
-                  spaceBetween="none"
-                  spaceInside="none"
-                  items={1}
-                  className="coffeeshop__marker"
-                />
-                <Rating
-                  style={{ maxWidth: 50 }}
-                  value={bookmark}
-                  onChange={handleBookmark}
-                  itemStyles={customBookmark}
-                  spaceBetween="none"
-                  spaceInside="none"
-                  items={1}
-                  className="coffeeshop__bookmark"
-                />
-              </>
-            )}
+            <div className="coffeeshop__actions">
+              {visitError && (
+                <p className="coffeeshop__error">
+                  You must{" "}
+                  {
+                    <Link to="/login" className="coffeeshop__error-link">
+                      log in
+                    </Link>
+                  }{" "}
+                  to use this feature.
+                </p>
+              )}
+              {!visitError && (
+                <>
+                  <Rating
+                    style={{ maxWidth: 50 }}
+                    value={visited}
+                    onChange={handleVisit}
+                    itemStyles={customMarker}
+                    spaceBetween="none"
+                    spaceInside="none"
+                    items={1}
+                    className="coffeeshop__marker"
+                  />
+                  <Rating
+                    style={{ maxWidth: 50 }}
+                    value={bookmark}
+                    onChange={handleBookmark}
+                    itemStyles={customBookmark}
+                    spaceBetween="none"
+                    spaceInside="none"
+                    items={1}
+                    className="coffeeshop__bookmark"
+                  />
+                </>
+              )}
+            </div>
           </div>
         </div>
         <button

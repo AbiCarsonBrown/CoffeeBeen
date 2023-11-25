@@ -44,10 +44,15 @@
 
   &__about {
     display: grid;
-    grid-template-columns: 60% 10% 10% 10% 10%;
+    grid-template-columns: 50%;
     grid-template-rows: 50% 50%;
+    justify-content: space-between;
     align-items: center;
     margin-top: 1rem;
+
+    @include tablet {
+      max-width: 900px;
+    }
   }
 
   &__rating {
@@ -69,15 +74,21 @@
   }
 
   &__actions {
-    @include flex(row, space-between, center);
+    display: grid;
+    justify-content: space-between;
+    width: 7.5rem;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 3;
+
+    @include tablet {
+      width: 8rem;
+    }
   }
 
   &__error {
     @include label;
-    grid-column-start: 2;
-    grid-column-end: 5;
-    grid-row-start: 1;
-    grid-row-end: 3;
 
     &-link {
       text-decoration: none;
@@ -90,17 +101,21 @@
   }
 
   &__marker {
-    grid-column: 2;
-    grid-row-start: 1;
-    grid-row-end: 3;
+    grid-column: 1;
     height: 3.25rem;
+
+    @include tablet {
+      height: 3.5rem;
+    }
   }
 
   &__bookmark {
-    grid-column: 4;
-    grid-row-start: 1;
-    grid-row-end: 3;
+    grid-column: 2;
     height: 3.25rem;
+
+    @include tablet {
+      height: 3.5rem;
+    }
   }
 
   &__reviews {
