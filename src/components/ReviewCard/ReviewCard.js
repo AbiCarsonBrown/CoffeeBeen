@@ -16,14 +16,27 @@ export default function ReviewCard({ review, isUser, submitVisit }) {
       {isUser && (
         <>
           <p className="review-card__user">YOU</p>
-          <button
-            onClick={() => {
-              setEdit(!edit);
-            }}>
-            <Edit height="1rem" />
-          </button>
-          <Delete height="1rem" />
+          {(review.review || review.rating) && (
+            <>
+              <button
+                onClick={() => {
+                  setEdit(!edit);
+                }}>
+                <Edit height="1rem" />
+              </button>
+              <Delete height="1rem" />
+            </>
+          )}
         </>
+      )}
+      {!edit && !review.rating && !review.review && (
+        <button
+          onClick={() => {
+            setEdit(true);
+          }}
+          className="review-card__new">
+          Leave your rating & review
+        </button>
       )}
       {!edit && (
         <>

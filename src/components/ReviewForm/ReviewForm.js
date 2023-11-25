@@ -35,18 +35,14 @@ export default function ReviewForm({ review, submitVisit, setEdit }) {
         spaceBetween="none"
         spaceInside="none"
       />
-      {/* <label htmlFor="review"></label> */}
       <textarea
         name="review"
         id="review"
         cols="25"
         rows="5"
         value={content}
-        onChange={(event) => {
-          setContent(event.target.value);
-        }}></textarea>
-      {/* <p className="review-form__review">{review.review}</p> */}
-      <button>Cancel</button>
+        onChange={(event) => setContent(event.target.value)}></textarea>
+      <button onClick={() => setEdit(false)}>Cancel</button>
       {/* --> state if coming from review card, no state if coffeeshop page */}
       <button type="submit" className="review-form__submit">
         Save

@@ -1,6 +1,5 @@
 import "./CoffeeShop.scss";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
-import ReviewForm from "../../components/ReviewForm/ReviewForm";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ReactComponent as ChevronDown } from "../../assets/icons/chevron-down.svg";
@@ -23,6 +22,7 @@ export default function CoffeeShop() {
   const [isLoading, setIsLoading] = useState(true);
   const [failedAuth, setFailedAuth] = useState(false);
   const [seeReviews, setSeeReviews] = useState(true);
+  const [visitError, setVisitError] = useState(false);
   const [coffeeShop, setCoffeeShop] = useState(null);
   const [visits, setVisits] = useState(null);
   const [userVisit, setUserVisit] = useState(null);
@@ -110,6 +110,7 @@ export default function CoffeeShop() {
       );
     } else {
       setFailedAuth(true);
+      setVisitError(true);
     }
   };
 
@@ -124,6 +125,7 @@ export default function CoffeeShop() {
       );
     } else {
       setFailedAuth(true);
+      setVisitError(true);
     }
   };
 
@@ -147,10 +149,7 @@ export default function CoffeeShop() {
   const userReview =
     userVisit &&
     visits.filter(
-      (visit) =>
-        (visit.review || visit.rating) &&
-        visit.visited &&
-        visit.visit_id === userVisit.visit_id
+      (visit) => !!visit.visited && visit.visit_id === userVisit.visit_id
     );
 
   visits.forEach((visit) => {
@@ -184,7 +183,7 @@ export default function CoffeeShop() {
             </p>
           </div>
           <div className="coffeeshop__actions">
-            {failedAuth && (
+            {visitError && (
               <p className="coffeeshop__error">
                 You must {<Link to="/login">log in</Link>} to use this feature.
               </p>
@@ -226,11 +225,6 @@ export default function CoffeeShop() {
                 isUser={true}
                 submitVisit={submitVisit}
               />
-            )}
-            {!failedAuth && !userReview[0] && !!userVisit.visited && (
-              <article className="coffeeshop__review-form">
-                {/* <ReviewForm review={} submitVisit={submitVisit}/> */}
-              </article>
             )}
             {reviews.map((review) => (
               <ReviewCard
