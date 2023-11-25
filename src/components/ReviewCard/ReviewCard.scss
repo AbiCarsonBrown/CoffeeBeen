@@ -19,13 +19,33 @@
     margin-bottom: 2rem;
   }
 
-  &__user {
+  &__username {
     font-size: 0.875rem;
     font-weight: 600;
 
     @include desktop {
       font-size: 1rem;
     }
+  }
+
+  &__header {
+  }
+
+  &__user {
+    @extend .review-card__username;
+  }
+
+  &__actions {
+  }
+
+  &__button {
+    &--edit {
+    }
+    &--delete {
+    }
+  }
+
+  &__content {
   }
 
   &__review {
@@ -35,5 +55,8 @@
     @include desktop {
       font-size: 0.875rem;
     }
+  }
+
+  &__new {
   }
 }

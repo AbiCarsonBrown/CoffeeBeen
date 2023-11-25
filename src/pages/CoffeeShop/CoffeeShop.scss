@@ -2,7 +2,7 @@
 @use "../../styles/partials/variables" as *;
 
 .coffeeshop {
-  color: $primary-colour;
+  color: $text;
 
   &__wrapper {
     @include wrapper;
@@ -58,6 +58,23 @@
     }
   }
 
+  &__stats {
+    @include flex(row, space-between, center);
+    max-width: $mobile-maxwidth;
+    padding-top: 1rem;
+
+    @include tablet {
+      justify-content: flex-start;
+      max-width: none;
+    }
+
+    @include desktop {
+      @include flex(column, space-between, flex-start);
+      height: 4.5rem;
+      padding-top: 0.75rem;
+    }
+  }
+
   &__visits {
     font-style: italic;
     font-size: 0.875rem;
@@ -76,31 +93,22 @@
     }
   }
 
-  &__stats {
-    @include flex(row, space-between, center);
-    max-width: $mobile-maxwidth;
-    padding-top: 1rem;
+  &__actions {
+  }
 
-    @include tablet {
-      justify-content: flex-start;
-      max-width: none;
-    }
-
-    @include desktop {
-      @include flex(column, space-between, flex-start);
-      height: 4.5rem;
-      padding-top: 0.75rem;
+  &__error {
+    &-link {
     }
   }
 
   &__reviews {
     background: none;
     font-size: 1rem;
-    color: $primary-colour;
+    color: $text;
     border: none;
     margin-top: 1rem;
     &:hover {
-      color: $highlight-colour;
+      color: $accent;
       text-decoration: underline;
     }
 
@@ -123,25 +131,13 @@
     }
   }
 
-  &__review-form {
-    @include card;
-    height: 10rem;
-    margin-top: 1rem;
-
-    @include tablet {
-      width: 16.75rem;
-      height: 11.5rem;
-    }
-
-    @include desktop {
-      width: 15rem;
-      height: 14rem;
-      margin-right: 2rem;
-      margin-bottom: 2rem;
-    }
+  &__chevron {
+    fill: $accent;
+    stroke: $accent;
+    height: 1rem;
   }
 
   &--highlight {
-    color: $highlight-colour;
+    color: $accent;
   }
 }

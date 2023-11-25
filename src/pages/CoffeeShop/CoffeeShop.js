@@ -1,7 +1,7 @@
 import "./CoffeeShop.scss";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { ReactComponent as ChevronDown } from "../../assets/icons/chevron-down.svg";
 import { ReactComponent as ChevronUp } from "../../assets/icons/chevron-up.svg";
 import { Rating } from "@smastrom/react-rating";
@@ -35,7 +35,7 @@ export default function CoffeeShop() {
   let ratingCount = 0;
   let averageRating = 0;
 
-  const getSingleUserVisit = async () => {
+  const getSingleUserVisit = useCallback(async () => {
     try {
       const { data } = await fetchSingleUserVisit(token, coffeeShopId);
       setUserVisit(data[0]);
@@ -46,18 +46,17 @@ export default function CoffeeShop() {
       setVisited(null);
       setBookmark(null);
     }
-  };
+  }, [token, coffeeShopId]);
 
-  const getCoffeeShop = async () => {
+  const getCoffeeShop = useCallback(async () => {
     try {
       const { data } = await fetchCoffeeShop(coffeeShopId);
       setCoffeeShop(data[0][0]);
       setVisits(data[1]);
-      setIsLoading(false);
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [coffeeShopId]);
 
   useEffect(() => {
     getCoffeeShop();
@@ -67,7 +66,8 @@ export default function CoffeeShop() {
     if (!token) {
       setFailedAuth(true);
     }
-  }, [coffeeShopId]);
+    setIsLoading(false);
+  }, [token, getSingleUserVisit, getCoffeeShop]);
 
   const submitVisit = (visited, wished, rating, review) => {
     const visit = {
@@ -130,7 +130,7 @@ export default function CoffeeShop() {
   };
 
   if (isLoading || !visits) {
-    return <p>Loading...</p>;
+    return <main className="loading">Loading...</main>;
   }
 
   const reviews =
@@ -185,7 +185,13 @@ export default function CoffeeShop() {
           <div className="coffeeshop__actions">
             {visitError && (
               <p className="coffeeshop__error">
-                You must {<Link to="/login">log in</Link>} to use this feature.
+                You must{" "}
+                {
+                  <Link to="/login" className="coffeeshop__error-link">
+                    log in
+                  </Link>
+                }{" "}
+                to use this feature.
               </p>
             )}
             <Rating
@@ -214,12 +220,12 @@ export default function CoffeeShop() {
           }}
           className="coffeeshop__reviews">
           Reviews ({reviews.length})
-          {!seeReviews && <ChevronDown height="1rem" />}
-          {seeReviews && <ChevronUp height="1rem" />}
+          {!seeReviews && <ChevronDown className="coffeeshop__chevron" />}
+          {seeReviews && <ChevronUp className="coffeeshop__chevron" />}
         </button>
         {seeReviews && (
           <div className="coffeeshop__reviews-list">
-            {!failedAuth && userReview[0] && (
+            {!failedAuth && userVisit && userReview[0] && (
               <ReviewCard
                 review={userReview[0]}
                 isUser={true}

@@ -6,7 +6,7 @@
 main {
   height: calc(100vh - 4.5rem);
   overflow: scroll;
-  background-color: $primary-background;
+  background-color: $background;
   padding: 5.25rem 1rem 0.75rem 1rem;
 
   @include tablet {

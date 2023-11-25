@@ -2,29 +2,23 @@ import { markerPath, bookmarkPath, coffeeBeanPath } from "./SVGPaths";
 
 const customMarker = {
   itemShapes: markerPath,
-  itemStrokeWidth: 1,
-  activeFillColor: "#f6236b",
-  activeStrokeColor: "#E8B4B8",
-  inactiveFillColor: "#E8B4B8",
-  inactiveStrokeColor: "#f6236b",
+  itemStrokeWidth: 0,
+  activeFillColor: "#d3319d",
+  inactiveFillColor: "#eba2d2",
 };
 
 const customBookmark = {
   itemShapes: bookmarkPath,
-  itemStrokeWidth: 1,
-  activeFillColor: "#f6236b",
-  activeStrokeColor: "#E8B4B8",
-  inactiveFillColor: "#E8B4B8",
-  inactiveStrokeColor: "#f6236b",
+  itemStrokeWidth: 0,
+  activeFillColor: "#d3319d",
+  inactiveFillColor: "#eba2d2",
 };
 
 const customCoffeeBean = {
   itemShapes: coffeeBeanPath,
-  itemStrokeWidth: 1,
-  activeFillColor: "#f6236b",
-  activeStrokeColor: "#E8B4B8",
-  inactiveFillColor: "#E8B4B8",
-  inactiveStrokeColor: "#f6236b",
+  itemStrokeWidth: 0,
+  activeFillColor: "#d3319d",
+  inactiveFillColor: "#eba2d2",
 };
 
 export { customMarker, customBookmark, customCoffeeBean };
