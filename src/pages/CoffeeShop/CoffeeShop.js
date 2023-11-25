@@ -168,7 +168,7 @@ export default function CoffeeShop() {
         <h2 className="coffeeshop__address">{coffeeShop.address}</h2>
         <div className="coffeeshop__details">
           <p className="coffeeshop__description">{coffeeShop.description}</p>
-          <div className="coffeeshop__stats">
+          <div className="coffeeshop__about">
             <Rating
               readOnly
               style={{ maxWidth: 100 }}
@@ -176,13 +176,15 @@ export default function CoffeeShop() {
               itemStyles={customCoffeeBean}
               spaceBetween="none"
               spaceInside="none"
+              className="coffeeshop__rating"
             />
             <p className="coffeeshop__visits">
               Visited by{" "}
-              <span className="coffeeshop--highlight">{visitCount}</span> users
+              <span className="coffeeshop__visits--highlight">
+                {visitCount}
+              </span>{" "}
+              users
             </p>
-          </div>
-          <div className="coffeeshop__actions">
             {visitError && (
               <p className="coffeeshop__error">
                 You must{" "}
@@ -194,24 +196,30 @@ export default function CoffeeShop() {
                 to use this feature.
               </p>
             )}
-            <Rating
-              style={{ maxWidth: 50 }}
-              value={visited}
-              onChange={handleVisit}
-              itemStyles={customMarker}
-              spaceBetween="none"
-              spaceInside="none"
-              items={1}
-            />
-            <Rating
-              style={{ maxWidth: 50 }}
-              value={bookmark}
-              onChange={handleBookmark}
-              itemStyles={customBookmark}
-              spaceBetween="none"
-              spaceInside="none"
-              items={1}
-            />
+            {!visitError && (
+              <>
+                <Rating
+                  style={{ maxWidth: 50 }}
+                  value={visited}
+                  onChange={handleVisit}
+                  itemStyles={customMarker}
+                  spaceBetween="none"
+                  spaceInside="none"
+                  items={1}
+                  className="coffeeshop__marker"
+                />
+                <Rating
+                  style={{ maxWidth: 50 }}
+                  value={bookmark}
+                  onChange={handleBookmark}
+                  itemStyles={customBookmark}
+                  spaceBetween="none"
+                  spaceInside="none"
+                  items={1}
+                  className="coffeeshop__bookmark"
+                />
+              </>
+            )}
           </div>
         </div>
         <button

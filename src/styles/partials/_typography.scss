@@ -2,60 +2,134 @@
 
 @font-face {
   font-family: Lora;
-  src: url("../../assets/fonts/lora-regular.ttf") format("truetype");
+  src: url("../../assets/fonts/lora/lora-regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: Lora;
-  src: url("../../assets/fonts/lora-italic.ttf") format("truetype");
+  src: url("../../assets/fonts/lora/lora-italic.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: Lora;
-  src: url("../../assets/fonts/lora-medium.ttf") format("truetype");
+  src: url("../../assets/fonts/lora/lora-medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: Lora;
-  src: url("../../assets/fonts/lora-medium-italic.ttf") format("truetype");
+  src: url("../../assets/fonts/lora/lora-medium-italic.ttf") format("truetype");
   font-weight: 500;
   font-style: italic;
 }
 
 @font-face {
   font-family: Lora;
-  src: url("../../assets/fonts/lora-semibold.ttf") format("truetype");
+  src: url("../../assets/fonts/lora/lora-semibold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: Lora;
-  src: url("../../assets/fonts/lora-semibold-italic.ttf") format("truetype");
+  src: url("../../assets/fonts/lora/lora-semibold-italic.ttf")
+    format("truetype");
   font-weight: 600;
   font-style: italic;
 }
 
 @font-face {
   font-family: Lora;
-  src: url("../../assets/fonts/lora-bold.ttf") format("truetype");
+  src: url("../../assets/fonts/lora/lora-bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: Lora;
-  src: url("../../assets/fonts/lora-bold-italic.ttf") format("truetype");
+  src: url("../../assets/fonts/lora/lora-bold-italic.ttf") format("truetype");
   font-weight: 700;
   font-style: italic;
 }
 
-* {
-  font-family: Lora;
+@font-face {
+  font-family: Noto Sans Thaana;
+  src: url("../../assets/fonts/noto-sans-thaana/notosansthaana-thin.ttf")
+    format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Noto Sans Thaana;
+  src: url("../../assets/fonts/noto-sans-thaana/notosansthaana-extralight.ttf")
+    format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Noto Sans Thaana;
+  src: url("../../assets/fonts/noto-sans-thaana/notosansthaana-light.ttf")
+    format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Noto Sans Thaana;
+  src: url("../../assets/fonts/noto-sans-thaana/notosansthaana-regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Noto Sans Thaana;
+  src: url("../../assets/fonts/noto-sans-thaana/notosansthaana-medium.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Noto Sans Thaana;
+  src: url("../../assets/fonts/noto-sans-thaana/notosansthaana-semibold.ttf")
+    format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Noto Sans Thaana;
+  src: url("../../assets/fonts/noto-sans-thaana/notosansthaana-bold.ttf")
+    format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Noto Sans Thaana;
+  src: url("../../assets/fonts/noto-sans-thaana/notosansthaana-extrabold.ttf")
+    format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Noto Sans Thaana;
+  src: url("../../assets/fonts/noto-sans-thaana/notosansthaana-black.ttf")
+    format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+body {
+  font-family: Noto Sans Thaana;
+  font-weight: 400;
 }
