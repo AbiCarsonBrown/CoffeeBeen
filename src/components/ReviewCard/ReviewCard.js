@@ -17,12 +17,12 @@ export default function ReviewCard({ review, isUser, submitVisit }) {
   };
 
   return (
-    <article className="review-card">
+    <article className={`review-card ${edit ? "review-card--edit" : ""}`}>
       {!isUser && <p className="review-card__username">{review.username}</p>}
 
       {isUser && (
         <div className="review-card__header">
-          <p className="review-card__user">Your review</p>
+          <p className="review-card__user">You</p>
           {review.review && !edit && (
             <div className="review-card__actions">
               <button
@@ -30,10 +30,10 @@ export default function ReviewCard({ review, isUser, submitVisit }) {
                   setEdit(true);
                 }}
                 className="review-card__button review-card__button--edit">
-                <Edit height="1rem" />
+                <Edit className="review-card__icon" />
               </button>
               <button className="review-card__button review-card__button--delete">
-                <Delete height="1rem" />
+                <Delete className="review-card__icon" />
               </button>
             </div>
           )}
@@ -41,7 +41,7 @@ export default function ReviewCard({ review, isUser, submitVisit }) {
       )}
 
       {!isUser && (
-        <div className="review-card__content">
+        <>
           <Rating
             readOnly
             style={{ maxWidth: 100 }}
@@ -49,13 +49,14 @@ export default function ReviewCard({ review, isUser, submitVisit }) {
             itemStyles={customCoffeeBean}
             spaceBetween="none"
             spaceInside="none"
+            className="review-card__rating"
           />
           <p className="review-card__review">{review.review}</p>
-        </div>
+        </>
       )}
 
       {isUser && (
-        <div className="review-card__content">
+        <>
           <Rating
             style={{ maxWidth: 100 }}
             value={rating}
@@ -63,6 +64,7 @@ export default function ReviewCard({ review, isUser, submitVisit }) {
             itemStyles={customCoffeeBean}
             spaceBetween="none"
             spaceInside="none"
+            className="review-card__rating"
           />
           {!edit && (
             <>
@@ -87,7 +89,7 @@ export default function ReviewCard({ review, isUser, submitVisit }) {
               setEdit={setEdit}
             />
           )}
-        </div>
+        </>
       )}
     </article>
   );

@@ -3,9 +3,10 @@
 
 .review-card {
   @include card;
-  height: 10rem;
+  height: 7.125rem;
   overflow: scroll;
   margin-top: 1rem;
+  padding-left: 0.5rem;
 
   @include tablet {
     width: 16.75rem;
@@ -19,44 +20,59 @@
     margin-bottom: 2rem;
   }
 
-  &__username {
-    font-size: 0.875rem;
-    font-weight: 600;
+  &--edit {
+    height: 15rem;
+  }
 
-    @include desktop {
-      font-size: 1rem;
-    }
+  &__username {
+    @include subheader;
+    padding-bottom: 0.75rem;
+    padding-left: 0.2rem;
   }
 
   &__header {
+    @include flex(row, space-between, center);
+    padding-bottom: 0.7rem;
+    padding-left: 0.2rem;
   }
 
   &__user {
-    @extend .review-card__username;
+    @include subheader;
   }
 
   &__actions {
+    @include flex(row, space-between, center);
   }
 
   &__button {
+    border: none;
+    background: none;
+
     &--edit {
-    }
-    &--delete {
+      padding-right: 0.75rem;
     }
   }
 
-  &__content {
+  &__icon {
+    height: 1.25rem;
+    stroke-width: 0;
+    fill: $accent-inactive;
+    cursor: pointer;
+
+    &:hover {
+      fill: $accent;
+    }
   }
 
   &__review {
-    font-size: 0.8125rem;
-    padding-top: 0.5rem;
-
-    @include desktop {
-      font-size: 0.875rem;
-    }
+    @include card-body;
+    padding-top: 0.75rem;
+    padding-left: 0.25rem;
   }
 
   &__new {
+    @include button;
+    margin-top: 0.75rem;
+    margin-left: 0.2rem;
   }
 }

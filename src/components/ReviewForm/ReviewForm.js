@@ -27,16 +27,16 @@ export default function ReviewForm({ review, submitVisit, setEdit }) {
         className="review-form__input">
         Leave your review here
       </textarea>
-      <button
-        onClick={() => setEdit(false)}
-        className="review-form__button review-form__button--cancel">
-        Cancel
-      </button>
-      <button
-        type="submit"
-        className="review-form__button review-form__button--submit">
-        Save
-      </button>
+      <div className="review-form__actions">
+        <button onClick={() => setEdit(false)} className="review-form__button">
+          Cancel
+        </button>
+        <button
+          type="submit"
+          className="review-form__button review-form__button--submit">
+          Save
+        </button>
+      </div>
     </form>
   );
 }

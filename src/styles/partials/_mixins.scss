@@ -33,18 +33,16 @@
 }
 
 @mixin card {
-  background-color: $secondary-background;
-  color: $primary-colour;
+  background-color: $secondary;
+  color: $text;
   padding: 0.75rem;
   border-radius: 5px;
-  border: 0.25px solid rgba(89, 75, 71, 0.5);
-  box-shadow: 1px 1px rgba(89, 75, 71, 0.5);
 }
 
 @mixin header-footer {
   position: fixed;
   width: 100%;
-  background-color: $primary-colour;
+  background-color: $background;
   z-index: 1;
   height: 4.5rem;
   padding: 0.75rem;
@@ -78,6 +76,7 @@
   font-family: Lora;
   font-weight: 600;
   font-size: 1rem;
+  color: $primary;
 
   @include tablet {
     font-size: 1.25rem;
@@ -88,12 +87,31 @@
   }
 }
 
+@mixin subheader {
+  font-family: Lora;
+  font-weight: 500;
+  font-size: 0.875rem;
+
+  @include desktop {
+    font-size: 1rem;
+  }
+}
+
 @mixin main-body {
   font-size: 0.875rem;
 
   @include desktop {
     font-size: 1rem;
     line-height: 1.5;
+  }
+}
+
+@mixin card-body {
+  font-size: 0.75rem;
+  color: $accent-inactive;
+
+  @include desktop {
+    font-size: 0.875rem;
   }
 }
 
@@ -117,6 +135,28 @@
   cursor: pointer;
 
   &:hover {
+    color: $accent;
+  }
+
+  @include desktop {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+@mixin button {
+  font-family: Noto Sans Thaana;
+  background: none;
+  border: 1px solid $accent-inactive;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: $accent-inactive;
+  cursor: pointer;
+  padding: 0.25rem 0.25rem;
+  border-radius: 5px;
+
+  &:hover {
+    border-color: $accent;
     color: $accent;
   }
 

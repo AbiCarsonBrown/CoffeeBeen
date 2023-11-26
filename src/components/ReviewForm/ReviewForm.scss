@@ -3,11 +3,32 @@
 
 .review-form {
   &__input {
-  }
-  &__button {
-    &--cancel {
+    width: 100%;
+    padding: 0.25rem;
+    margin: 1rem 0.1rem;
+    resize: none;
+    background-color: $text;
+    border: none;
+    border-radius: 2px;
+    font-family: Noto Sans Thaana;
+    color: $accent;
+    font-size: 0.75rem;
+
+    @include desktop {
+      font-size: 0.875rem;
     }
+  }
+
+  &__actions {
+    @include flex(row, flex-end, center);
+  }
+
+  &__button {
+    @include button;
+    width: 4.5rem;
+
     &--submit {
+      margin-left: 0.5rem;
     }
   }
 }
