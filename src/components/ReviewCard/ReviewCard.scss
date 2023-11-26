@@ -91,4 +91,24 @@
       margin-top: 1.25rem;
     }
   }
+
+  &__delete {
+    &-check {
+      @include label;
+      padding-bottom: 1rem;
+    }
+
+    &-buttons {
+      @include flex(row, flex-end, center);
+    }
+
+    &-button {
+      @include button;
+      width: 4.5rem;
+
+      &--confirm {
+        margin-left: 0.5rem;
+      }
+    }
+  }
 }
