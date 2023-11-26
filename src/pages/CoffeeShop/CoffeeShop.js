@@ -17,6 +17,7 @@ import {
   editUserVisit,
   fetchSingleUserVisit,
 } from "../../utils/axios";
+import PageNotFound from "../PageNotFound/PageNotFound";
 
 export default function CoffeeShop() {
   const [isLoading, setIsLoading] = useState(true);
@@ -160,6 +161,10 @@ export default function CoffeeShop() {
       averageRating = totalRating / ratingCount;
     }
   });
+
+  if (!coffeeShop) {
+    return <PageNotFound />;
+  }
 
   return (
     <main className="coffeeshop">

@@ -6,6 +6,7 @@ import CoffeeShop from "./pages/CoffeeShop/CoffeeShop";
 import Profile from "./pages/Profile/Profile";
 import Login from "./pages/Login/Login";
 import Footer from "./components/Footer/Footer";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import { useState } from "react";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/places/:coffeeShopId" element={<CoffeeShop />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
       </BrowserRouter>

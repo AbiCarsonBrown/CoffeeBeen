@@ -1,0 +1,27 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.not-found {
+  &__wrapper {
+    @include wrapper;
+    padding: 1rem 1.5rem;
+
+    @include tablet {
+      padding: 1rem;
+    }
+  }
+
+  &__title {
+    @include page-subheader;
+    color: $text;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $primary;
+
+    &:hover {
+      color: $accent-inactive;
+    }
+  }
+}
