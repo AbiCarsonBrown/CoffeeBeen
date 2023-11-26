@@ -1,8 +1,7 @@
 import "./LoginEl.scss";
 
 export default function LoginEl({
-  title,
-  signUp,
+  isSignUp,
   clickHandler,
   formErrors,
   error,
@@ -10,10 +9,11 @@ export default function LoginEl({
 }) {
   return (
     <article className="log-in">
-      <h1 className="log-in__title">{title}</h1>
-
+      <h1 className="log-in__title">
+        {isSignUp ? "Sign Up for a Free Account" : "Log In to Your Account"}
+      </h1>
       <form onSubmit={clickHandler} className="log-in__form">
-        {signUp && (
+        {isSignUp && (
           <>
             <div className="log-in__group">
               <label htmlFor="name" className="log-in__label">
@@ -26,12 +26,9 @@ export default function LoginEl({
                 className="log-in__input"
                 placeholder="Enter your full name"
               />
-              <p
-                className={`log-in__error ${
-                  formErrors.name ? "log-in__error--true" : ""
-                }`}>
-                Please enter your full name
-              </p>
+              {formErrors.name && (
+                <p className="log-in__error">Please enter your full name</p>
+              )}
             </div>
 
             <div className="log-in__group">
@@ -45,12 +42,9 @@ export default function LoginEl({
                 className="log-in__input"
                 placeholder="Choose a username"
               />
-              <p
-                className={`log-in__error ${
-                  formErrors.username ? "log-in__error--true" : ""
-                }`}>
-                Please enter a username
-              </p>
+              {formErrors.username && (
+                <p className="log-in__error">Please enter a username</p>
+              )}
             </div>
           </>
         )}
@@ -66,12 +60,9 @@ export default function LoginEl({
             className="log-in__input"
             placeholder="Enter your email address"
           />
-          <p
-            className={`log-in__error ${
-              formErrors.email ? "log-in__error--true" : ""
-            }`}>
-            Please enter your email address
-          </p>
+          {formErrors.email && (
+            <p className="log-in__error">Please enter your email address</p>
+          )}
         </div>
 
         <div className="log-in__group">
@@ -84,30 +75,20 @@ export default function LoginEl({
             name="password"
             className="log-in__input"
             placeholder={`${
-              signUp ? "Choose your password" : "Enter your password"
+              isSignUp ? "Choose your password" : "Enter your password"
             }`}
           />
 
-          {!signUp && (
-            <p
-              className={`log-in__error ${
-                formErrors.password ? "log-in__error--true" : ""
-              }`}>
-              Please enter your password
-            </p>
-          )}
-
-          {signUp && (
-            <p
-              className={`log-in__error ${
-                formErrors.password ? "log-in__error--true" : ""
-              }`}>
-              Please enter a password
+          {formErrors.password && (
+            <p className="log-in__error">
+              {isSignUp
+                ? "Please enter a password"
+                : "Please enter your password"}
             </p>
           )}
         </div>
 
-        {signUp && (
+        {isSignUp && (
           <div className="log-in__group">
             <label htmlFor="confirm_password" className="log-in__label">
               Confirm Password:
@@ -119,24 +100,18 @@ export default function LoginEl({
               className="log-in__input"
               placeholder="Confirm your password"
             />
-            <p
-              className={`log-in__error ${
-                formErrors.confirm_password ? "log-in__error--true" : ""
-              }`}>
-              Please confirm your password
-            </p>
-            <p
-              className={`log-in__error ${
-                formErrors.password_match ? "log-in__error--true" : ""
-              }`}>
-              Passwords must match
-            </p>
+            {formErrors.confirm_password && (
+              <p className="log-in__error">Please confirm your password</p>
+            )}
+            {formErrors.password_match && (
+              <p className="log-in__error">Passwords must match</p>
+            )}
           </div>
         )}
 
-        <button type="submit">{signUp ? "Sign Up Now" : "Log In"}</button>
+        <button type="submit">{isSignUp ? "Sign Up Now" : "Log In"}</button>
       </form>
-      {error && <p className="log-in__error--true">{error}</p>}
+      {error && <p className="log-in__error">{error}</p>}
       {success && <p className="log-in__success">Success! Logging in...</p>}
     </article>
   );

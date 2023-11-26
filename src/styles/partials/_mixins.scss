@@ -42,6 +42,7 @@
 @mixin header-footer {
   position: fixed;
   width: 100%;
+  background-color: $background;
   z-index: 1;
   height: 4.5rem;
 

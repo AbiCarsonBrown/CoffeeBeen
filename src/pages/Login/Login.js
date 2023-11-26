@@ -5,7 +5,7 @@ import { logIn, register } from "../../utils/axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const [signUp, setSignUp] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
@@ -20,6 +20,11 @@ export default function Login() {
   };
 
   const [formErrors, setFormErrors] = useState(noFormErrors);
+
+  const handleIsSignUp = (isSignUp) => {
+    setIsSignUp(isSignUp);
+    setFormErrors(noFormErrors);
+  };
 
   const handleLogIn = async (event) => {
     event.preventDefault();
@@ -55,7 +60,6 @@ export default function Login() {
         navigate("/");
       }, 1000);
     } catch (error) {
-      console.error(error);
       setError(error.response.data);
     }
   };
@@ -116,7 +120,6 @@ export default function Login() {
         navigate("/");
       }, 1000);
     } catch (error) {
-      console.error(error);
       setError(error.response.data);
     }
   };
@@ -126,40 +129,27 @@ export default function Login() {
       <div className="sign-in__wrapper">
         <div className="sign-in__buttons">
           <button
-            onClick={() => setSignUp(false)}
+            onClick={() => handleIsSignUp(false)}
             className={`sign-in__button ${
-              signUp ? "sign-in__button--deselect" : ""
+              isSignUp ? "sign-in__button--deselect" : ""
             }`}>
             Log In
           </button>
           <button
-            onClick={() => setSignUp(true)}
+            onClick={() => handleIsSignUp(true)}
             className={`sign-in__button ${
-              !signUp ? "sign-in__button--deselect" : ""
+              !isSignUp ? "sign-in__button--deselect" : ""
             }`}>
             Sign Up
           </button>
         </div>
-        {!signUp && (
-          <LoginEl
-            title="Log In to Your Account"
-            signUp={false}
-            clickHandler={handleLogIn}
-            formErrors={formErrors}
-            error={error}
-            success={success}
-          />
-        )}
-        {signUp && (
-          <LoginEl
-            title="Sign Up for a Free Account"
-            signUp={true}
-            clickHandler={handleSignUp}
-            formErrors={formErrors}
-            error={error}
-            success={success}
-          />
-        )}
+        <LoginEl
+          isSignUp={isSignUp}
+          clickHandler={isSignUp ? handleSignUp : handleLogIn}
+          formErrors={formErrors}
+          error={error}
+          success={success}
+        />
       </div>
     </main>
   );
