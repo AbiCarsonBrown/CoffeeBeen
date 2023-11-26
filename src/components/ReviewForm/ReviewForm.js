@@ -24,11 +24,12 @@ export default function ReviewForm({ review, submitVisit, setEdit }) {
         rows="5"
         value={content}
         onChange={(event) => setContent(event.target.value)}
-        className="review-form__input">
-        Leave your review here
-      </textarea>
+        placeholder="Leave your review here"
+        className="review-form__input"></textarea>
       <div className="review-form__actions">
-        <button onClick={() => setEdit(false)} className="review-form__button">
+        <button
+          onClick={() => setEdit(false)}
+          className="review-form__button review-form__button--cancel">
           Cancel
         </button>
         <button

@@ -10,18 +10,21 @@
 
   @include tablet {
     width: 16.75rem;
-    height: 11.5rem;
+    height: 15rem;
+    margin: 0.5rem;
   }
 
   @include desktop {
-    width: 15rem;
-    height: 14rem;
-    margin-right: 2rem;
-    margin-bottom: 2rem;
+    height: 16.125rem;
+    margin: 0;
   }
 
   &--edit {
     height: 15rem;
+
+    @include desktop {
+      height: 16.125rem;
+    }
   }
 
   &__username {
@@ -31,8 +34,9 @@
   }
 
   &__header {
-    @include flex(row, space-between, center);
-    padding-bottom: 0.7rem;
+    @include flex(row, space-between, flex-start);
+    height: 1.5rem;
+    margin-bottom: 0.5rem;
     padding-left: 0.2rem;
   }
 
@@ -74,5 +78,13 @@
     @include button;
     margin-top: 0.75rem;
     margin-left: 0.2rem;
+
+    @include tablet {
+      margin-top: 1rem;
+    }
+
+    @include desktop {
+      margin-top: 1.25rem;
+    }
   }
 }
