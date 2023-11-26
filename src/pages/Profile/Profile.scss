@@ -1,2 +1,39 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/variables" as *;
+
+.profile {
+  &__wrapper {
+    @include wrapper;
+  }
+
+  &__title {
+    @include page-header;
+    padding-bottom: 1rem;
+    max-width: $mobile-maxwidth;
+    margin: 0 auto;
+  }
+
+  &__button {
+    @include card;
+    @include page-subheader;
+    display: grid;
+    border: none;
+    color: $accent-inactive;
+    width: 100%;
+    max-width: 28rem;
+    margin: 0.75rem auto;
+    padding: 1rem;
+
+    &:hover {
+      color: $accent;
+    }
+
+    @include tablet {
+      margin: 1rem auto;
+    }
+
+    @include desktop {
+      margin: 1.5rem auto;
+    }
+  }
+}

@@ -2,8 +2,6 @@
 @use "../../styles/partials/variables" as *;
 
 .coffeeshop {
-  color: $text;
-
   &__wrapper {
     @include wrapper;
   }

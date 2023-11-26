@@ -1,5 +1,5 @@
 import "./Profile.scss";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { fetchUser, fetchUserVisits } from "../../utils/axios";
 import PlaceList from "../../components/PlaceList/PlaceList";
@@ -12,7 +12,7 @@ export default function Profile() {
   const [show, setShow] = useState(null);
   const token = localStorage.getItem("token");
 
-  const login = async () => {
+  const login = useCallback(async () => {
     try {
       const userResponse = await fetchUser(token);
       const visitsResponse = await fetchUserVisits(token);
@@ -23,7 +23,7 @@ export default function Profile() {
     } catch (error) {
       setFailedAuth(true);
     }
-  };
+  }, [token]);
 
   const handleClose = () => {
     setShow(null);
@@ -33,7 +33,7 @@ export default function Profile() {
     if (token) {
       login();
     }
-  }, []);
+  }, [login, token]);
 
   if (!token || failedAuth) {
     return <Navigate to="/login" />;
@@ -52,29 +52,46 @@ export default function Profile() {
   });
 
   return (
-    <main>
-      <p>Welcome back {user.username}</p>
-      {!show && (
-        <>
-          <button
-            onClick={() => {
-              setShow("been");
-            }}>
-            Been
-          </button>
-          <button
-            onClick={() => {
-              setShow("wishlist");
-            }}>
-            Wishlist
-          </button>
-        </>
-      )}
-      {show === "been" && <PlaceList places={been} handleClose={handleClose} />}
+    <main className="profile">
+      <div className="profile__wrapper">
+        <h1 className="profile__title">Welcome back {user.username}</h1>
+        {!show && (
+          <>
+            <button
+              onClick={() => {
+                setShow("been");
+              }}
+              className="profile__button">
+              Where have I been?
+            </button>
+            <button
+              onClick={() => {
+                setShow("wishlist");
+              }}
+              className="profile__button">
+              Where shall I go?
+            </button>
+            <button
+              onClick={() => {
+                setShow("all");
+              }}
+              className="profile__button">
+              See all
+            </button>
+          </>
+        )}
+        {show === "been" && (
+          <PlaceList places={been} handleClose={handleClose} />
+        )}
 
-      {show === "wishlist" && (
-        <PlaceList places={wishlist} handleClose={handleClose} />
-      )}
+        {show === "wishlist" && (
+          <PlaceList places={wishlist} handleClose={handleClose} />
+        )}
+
+        {show === "all" && (
+          <PlaceList places={visits} handleClose={handleClose} />
+        )}
+      </div>
     </main>
   );
 }

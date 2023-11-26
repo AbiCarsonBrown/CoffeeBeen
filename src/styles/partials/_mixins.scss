@@ -75,6 +75,7 @@
   font-weight: 700;
   line-height: 1.375;
   font-size: 1.5rem;
+  color: $text;
 
   @include tablet {
     font-size: 1.75rem;
@@ -112,6 +113,7 @@
 
 @mixin main-body {
   font-size: 0.875rem;
+  color: $text;
 
   @include desktop {
     font-size: 1rem;
