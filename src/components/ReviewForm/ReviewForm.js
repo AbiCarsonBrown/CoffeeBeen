@@ -28,6 +28,7 @@ export default function ReviewForm({ review, submitVisit, setEdit }) {
         className="review-form__input"></textarea>
       <div className="review-form__actions">
         <button
+          type="button"
           onClick={() => setEdit(false)}
           className="review-form__button review-form__button--cancel">
           Cancel

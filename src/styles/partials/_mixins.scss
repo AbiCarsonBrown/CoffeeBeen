@@ -49,11 +49,26 @@
 
   @include tablet {
     height: 5rem;
-    padding: 1rem 1.25rem;
+    padding: 1rem;
   }
 
   @include desktop {
     height: 6rem;
+  }
+}
+
+@mixin header-title {
+  font-family: Lora;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: $primary;
+
+  &:hover {
+    color: $accent;
+  }
+
+  @include desktop {
+    font-size: 2rem;
   }
 }
 
@@ -134,7 +149,7 @@
   cursor: pointer;
 
   &:hover {
-    color: $accent;
+    color: $primary;
   }
 
   @include desktop {

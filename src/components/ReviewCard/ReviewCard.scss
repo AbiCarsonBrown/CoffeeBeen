@@ -36,8 +36,12 @@
   &__header {
     @include flex(row, space-between, flex-start);
     height: 1.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     padding-left: 0.2rem;
+
+    @include tablet {
+      margin-bottom: 0.5rem;
+    }
   }
 
   &__user {

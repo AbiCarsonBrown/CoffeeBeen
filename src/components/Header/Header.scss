@@ -7,11 +7,11 @@
   &__nav {
     width: 100%;
     display: grid;
-    grid-template-columns: 20% 60% 10% 10%;
+    grid-template-columns: 20% 60%;
     align-items: center;
 
     @include tablet {
-      grid-template-columns: 80% 10% 5% 5%;
+      grid-template-columns: 85%;
       max-width: $wrapper-maxwidth;
       padding: 0 2rem;
       margin: 0 auto;
@@ -27,20 +27,28 @@
     &-link {
       display: grid;
       grid-column: 2;
+      grid-row-start: 1;
+      grid-row-end: 3;
       align-items: center;
       justify-content: center;
       text-decoration: none;
 
       @include tablet {
         grid-column: 1;
+        grid-row-end: 2;
         justify-self: flex-start;
       }
     }
 
     &-icon {
       height: 3rem;
+      fill: $primary;
       grid-column: 1;
       padding-right: 0.3rem;
+
+      &:hover {
+        fill: $accent;
+      }
 
       @include desktop {
         height: 4rem;
@@ -50,34 +58,47 @@
   }
 
   &__title {
+    @include header-title;
     grid-column: 2;
-    color: $highlight-colour;
-    font-weight: 500;
-    font-style: italic;
-
-    @include desktop {
-      font-size: 2rem;
-    }
   }
 
   &__list {
     &-button {
       background: none;
       border: none;
-      justify-self: flex-end;
       grid-column: 3;
+      grid-row: 2;
+      justify-self: flex-end;
+      padding-top: 0.5rem;
+      cursor: pointer;
 
       @include tablet {
         grid-column: 2;
+        grid-row: 1;
+        padding-top: 0.25rem;
       }
 
-      &--hide {
-        display: none;
+      @include desktop {
+        grid-column: 3;
       }
     }
 
     &-icon {
-      height: 2.8rem;
+      height: 1.75rem;
+      fill: $accent-inactive;
+      stroke-width: 0;
+
+      &:hover {
+        fill: $primary;
+      }
+
+      @include tablet {
+        height: 2.25rem;
+      }
+
+      @include desktop {
+        height: 3rem;
+      }
     }
   }
 
@@ -86,31 +107,50 @@
       display: none;
 
       @include desktop {
-        display: flex;
-        grid-column: 3;
-        justify-self: flex-end;
-      }
-
-      &--hide {
-        display: none;
+        display: grid;
+        grid-column: 2;
       }
     }
 
     &-icon {
-      height: 2.8rem;
+      @include desktop {
+        justify-self: flex-end;
+        height: 3rem;
+        stroke-width: 0;
+        fill: $accent-inactive;
+
+        &:hover {
+          fill: $primary;
+        }
+      }
+    }
+  }
+
+  &__logout {
+    @include text-button;
+    font-size: 0.625rem;
+    color: $accent-inactive;
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: flex-end;
+    align-self: flex-start;
+
+    @include tablet {
+      justify-self: flex-start;
+      align-self: center;
+      font-size: 0.875rem;
+      padding-left: 1rem;
+    }
+
+    @include desktop {
+      grid-column: 4;
+      font-size: 1.167rem;
+      justify-self: flex-end;
     }
   }
 
   &__login {
-    grid-column: 4;
+    @extend .header__logout;
     text-decoration: none;
-    color: white;
-  }
-
-  &__logout {
-    grid-column: 4;
-    background: none;
-    border: none;
-    color: white;
   }
 }
