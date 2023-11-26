@@ -55,6 +55,33 @@
   }
 
   &__error {
+    @include label;
+    color: $secondary;
+    background-color: $text;
     text-align: right;
+    width: 13rem;
+    height: 1.5rem;
+    justify-self: flex-end;
+    padding: 0.25rem;
+    margin-bottom: 0.25rem;
+    border-radius: 3px;
+
+    @include tablet {
+      width: 14rem;
+      height: 1.75rem;
+    }
+
+    @include desktop {
+      width: 15rem;
+    }
+
+    &-link {
+      text-decoration: none;
+      color: $primary;
+
+      &:hover {
+        color: $accent-inactive;
+      }
+    }
   }
 }

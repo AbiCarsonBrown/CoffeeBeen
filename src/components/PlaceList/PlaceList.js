@@ -20,7 +20,13 @@ export default function PlaceList({
       )}
       {failedAuth && (
         <p className="place-list__error">
-          You must {<Link to="/login">log in</Link>} to use this feature.
+          You must{" "}
+          {
+            <Link to="/login" className="place-list__error-link">
+              log in
+            </Link>
+          }{" "}
+          to use this feature.
         </p>
       )}
       {places.map((place) => {

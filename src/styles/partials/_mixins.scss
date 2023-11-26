@@ -131,6 +131,7 @@
 }
 
 @mixin label {
+  color: $text;
   font-size: 0.75rem;
   font-style: italic;
 
