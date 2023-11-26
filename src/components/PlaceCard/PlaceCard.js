@@ -66,8 +66,10 @@ export default function PlaceCard({
 
   return (
     <article className="place-card">
-      <Link to={`/places/${place.coffeeshop_id}`}>{place.coffeeshop_name}</Link>
-      <p>{place.address}</p>
+      <Link to={`/places/${place.coffeeshop_id}`} className="place-card__name">
+        {place.coffeeshop_name}
+      </Link>
+      <p className="place-card__address">{place.address}</p>
       <Rating
         style={{ maxWidth: 50 }}
         value={visited}
@@ -76,6 +78,7 @@ export default function PlaceCard({
         spaceBetween="none"
         spaceInside="none"
         items={1}
+        className="place-card__action place-card__action--marker"
       />
       <Rating
         style={{ maxWidth: 50 }}
@@ -85,6 +88,7 @@ export default function PlaceCard({
         spaceBetween="none"
         spaceInside="none"
         items={1}
+        className="place-card__action place-card__action--bookmark"
       />
     </article>
   );

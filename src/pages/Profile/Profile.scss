@@ -8,9 +8,12 @@
 
   &__title {
     @include page-header;
-    padding-bottom: 1rem;
-    max-width: $mobile-maxwidth;
+    max-width: 28rem;
     margin: 0 auto;
+
+    @include tablet {
+      max-width: $mobile-maxwidth;
+    }
   }
 
   &__button {
@@ -21,15 +24,16 @@
     color: $accent-inactive;
     width: 100%;
     max-width: 28rem;
-    margin: 0.75rem auto;
+    margin: 1.5rem auto 0 auto;
     padding: 1rem;
+    cursor: pointer;
 
     &:hover {
       color: $accent;
     }
 
     @include tablet {
-      margin: 1rem auto;
+      margin: 1.5rem auto 1rem auto;
     }
 
     @include desktop {

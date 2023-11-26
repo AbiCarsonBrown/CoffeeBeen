@@ -81,15 +81,19 @@ export default function Profile() {
           </>
         )}
         {show === "been" && (
-          <PlaceList places={been} handleClose={handleClose} />
+          <PlaceList places={been} handleClose={handleClose} page="profile" />
         )}
 
         {show === "wishlist" && (
-          <PlaceList places={wishlist} handleClose={handleClose} />
+          <PlaceList
+            places={wishlist}
+            handleClose={handleClose}
+            page="profile"
+          />
         )}
 
         {show === "all" && (
-          <PlaceList places={visits} handleClose={handleClose} />
+          <PlaceList places={visits} handleClose={handleClose} page="profile" />
         )}
       </div>
     </main>

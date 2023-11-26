@@ -2,24 +2,30 @@
 @use "../../styles/partials/variables" as *;
 
 .place-list {
-  position: absolute;
-  z-index: 2;
-  top: 4.5rem;
-  right: 0;
-  width: 100%;
-  height: calc(100vh - 9rem);
-  overflow: scroll;
-  background-color: white;
+  display: grid;
+  max-width: 28rem;
+  margin: 0 auto;
 
   @include tablet {
-    top: 5rem;
-    width: 40%;
-    height: calc(100vh - 10rem);
+    max-width: $mobile-maxwidth;
   }
 
-  @include desktop {
-    top: 6rem;
-    height: calc(100vh);
+  &__close {
+    justify-self: flex-end;
+    background: none;
+    border: none;
+    margin-right: 0.25rem;
+    cursor: pointer;
+
+    &-icon {
+      fill: $accent-inactive;
+      stroke-width: 0;
+      height: 1.25rem;
+
+      &:hover {
+        fill: $accent;
+      }
+    }
   }
 
   &__error {
