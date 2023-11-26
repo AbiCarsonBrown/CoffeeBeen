@@ -4,13 +4,7 @@ import { ReactComponent as Close } from "../../assets/icons/close-icon.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function PlaceList({
-  places,
-  handleClose,
-  page,
-  getCoffeeShops,
-  getUserVisits,
-}) {
+export default function PlaceList({ places, handleClose, page, submitVisit }) {
   const [failedAuth, setFailedAuth] = useState(false);
   return (
     <section className={`place-list place-list--${page}`}>
@@ -27,8 +21,7 @@ export default function PlaceList({
           <PlaceCard
             key={place.coffeeshop_id}
             place={place}
-            getCoffeeShops={getCoffeeShops}
-            getUserVisits={getUserVisits}
+            submitVisit={submitVisit}
             setFailedAuth={setFailedAuth}
           />
         );

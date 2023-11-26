@@ -4,10 +4,12 @@
 .place-card {
   @include card;
   display: grid;
+  grid-template-columns: 60% 10% 15% 15%;
   align-items: center;
   margin-bottom: 1.5rem;
 
   @include tablet {
+    grid-template-columns: 60%;
     padding: 1.25rem;
   }
 

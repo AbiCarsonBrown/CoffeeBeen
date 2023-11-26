@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { fetchUser, fetchUserVisits } from "../../utils/axios";
 import PlaceList from "../../components/PlaceList/PlaceList";
+import { postUserVisit, editUserVisit } from "../../utils/axios";
 
 export default function Profile() {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +28,42 @@ export default function Profile() {
 
   const handleClose = () => {
     setShow(null);
+  };
+
+  const submitVisit = (
+    visit_id,
+    coffeeshop_id,
+    user_id,
+    visited,
+    on_wishlist,
+    rating,
+    review
+  ) => {
+    const visit = {
+      visit_id,
+      coffeeshop_id,
+      user_id,
+      visited,
+      on_wishlist,
+      rating,
+      review,
+    };
+
+    if (!visit_id) {
+      try {
+        postUserVisit(token, visit);
+        login();
+      } catch (error) {
+        setFailedAuth(true);
+      }
+    } else {
+      try {
+        editUserVisit(token, visit);
+        login();
+      } catch (error) {
+        setFailedAuth(true);
+      }
+    }
   };
 
   useEffect(() => {
@@ -81,7 +118,12 @@ export default function Profile() {
           </>
         )}
         {show === "been" && (
-          <PlaceList places={been} handleClose={handleClose} page="profile" />
+          <PlaceList
+            places={been}
+            handleClose={handleClose}
+            page="profile"
+            submitVisit={submitVisit}
+          />
         )}
 
         {show === "wishlist" && (
@@ -89,11 +131,17 @@ export default function Profile() {
             places={wishlist}
             handleClose={handleClose}
             page="profile"
+            submitVisit={submitVisit}
           />
         )}
 
         {show === "all" && (
-          <PlaceList places={visits} handleClose={handleClose} page="profile" />
+          <PlaceList
+            places={visits}
+            handleClose={handleClose}
+            page="profile"
+            submitVisit={submitVisit}
+          />
         )}
       </div>
     </main>
