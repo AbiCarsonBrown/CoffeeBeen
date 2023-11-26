@@ -8,6 +8,7 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 import { Link } from "react-router-dom";
+import { options } from "../../utils/GoogleMapsStyles";
 
 export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
   const { isLoaded } = useLoadScript({
@@ -17,56 +18,6 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
 
   const handleInfoOpen = (id) => {
     setIsOpen(id);
-  };
-
-  const options = {
-    disableDefaultUI: true,
-    zoomControl: false,
-    backgroundColor: "#010402",
-    styles: [
-      {
-        featureType: "poi",
-        stylers: [{ visibility: "off" }],
-      },
-      {
-        featureType: "poi.park",
-        stylers: [{ visibility: "simplified" }, { color: "#594b47" }],
-      },
-      {
-        featureType: "poi.park",
-        elementType: "labels",
-        stylers: [{ visibility: "off" }],
-      },
-      {
-        featureType: "road",
-        elementType: "labels.text",
-        stylers: [{ visibility: "simplified" }],
-      },
-      {
-        featureType: "road.local",
-        stylers: [{ visibility: "off" }],
-      },
-      {
-        featureType: "road",
-        stylers: [{ color: "#f5ddd1" }],
-      },
-      {
-        featureType: "landscape.man_made",
-        stylers: [{ visibility: "off" }],
-      },
-      {
-        featureType: "transit.line",
-        stylers: [{ visibility: "off" }],
-      },
-      {
-        featureType: "water",
-        stylers: [{ color: "#eba2d2" }],
-      },
-      {
-        featureType: "administrative",
-        stylers: [{ color: "#f7fdf9" }],
-      },
-    ],
   };
 
   let userVisited = null;
@@ -94,7 +45,7 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
               <MarkerF
                 key={coffeeshop_id}
                 icon={notVisitedPin}
-                height="50rem"
+                height="100rem"
                 position={{
                   lat: Number(latitude),
                   lng: Number(longitude),
@@ -118,7 +69,7 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
               <MarkerF
                 key={coffeeshop_id}
                 icon={visitedPin}
-                height="50rem"
+                height="100rem"
                 position={{
                   lat: Number(latitude),
                   lng: Number(longitude),
@@ -142,7 +93,7 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
               <MarkerF
                 key={coffeeshop_id}
                 icon={notVisitedPin}
-                height="50rem"
+                height="100rem"
                 position={{
                   lat: Number(latitude),
                   lng: Number(longitude),
