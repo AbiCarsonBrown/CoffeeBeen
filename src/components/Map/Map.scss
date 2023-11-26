@@ -1,4 +1,39 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
 .map-container {
   height: 100%;
   width: 100%;
+}
+
+.gm-style .gm-style-iw-c {
+  text-align: center !important;
+  max-width: 8rem !important;
+
+  @include tablet {
+    max-width: 9rem !important;
+  }
+
+  @include desktop {
+    max-width: 10rem !important;
+  }
+  a {
+    font-family: Lora;
+    font-weight: 500;
+    font-size: 0.75rem;
+    color: $secondary;
+    text-decoration: none;
+
+    &:hover {
+      color: $accent;
+    }
+
+    @include tablet {
+      font-size: 0.875rem;
+    }
+
+    @include desktop {
+      font-size: 1rem;
+    }
+  }
 }

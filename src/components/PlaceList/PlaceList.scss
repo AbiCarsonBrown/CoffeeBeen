@@ -24,7 +24,15 @@
 
     @include tablet {
       width: 44vw;
+      height: calc(100vh - 5rem);
       max-width: 35rem;
+      padding-top: 5rem;
+    }
+
+    @include desktop {
+      height: 100vh;
+      padding-top: 6rem;
+      padding-bottom: 1.5rem;
     }
   }
 

@@ -7,7 +7,6 @@ import {
   MarkerF,
   useLoadScript,
 } from "@react-google-maps/api";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
