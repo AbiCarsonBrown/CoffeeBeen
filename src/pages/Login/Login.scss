@@ -10,20 +10,30 @@
   }
 
   &__buttons {
-    @include flex(row, space-between, center);
+    @include flex(row, flex-start, center);
+    max-width: 36rem;
+    margin: 0 auto;
+
+    @include desktop {
+      max-width: none;
+      width: 42rem;
+    }
   }
 
   &__button {
     @include card;
+    @include page-subheader;
+    color: $accent;
     width: 50%;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border-bottom: none;
-    box-shadow: 1px 0 rgba(89, 75, 71, 0.5);
+    border: none;
+    border-bottom: 3px solid $accent;
 
     &--deselect {
-      background-color: $deselect-background;
-      border-bottom: 0.25px solid rgba(89, 75, 71, 0.5);
+      color: $accent-inactive;
+      background-color: $secondary-inactive;
+      border-bottom: 3px solid $secondary-inactive;
     }
   }
 }

@@ -6,4 +6,120 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-top: none;
+  height: 29rem;
+  max-width: 36rem;
+  margin: 0 auto;
+
+  @include tablet {
+    height: 30rem;
+    padding: 2rem;
+  }
+
+  @include desktop {
+    max-width: none;
+    width: 42rem;
+    height: 37.75rem;
+  }
+
+  &__title {
+    @include page-header;
+    height: 4.125rem;
+    padding-bottom: 0.5rem;
+
+    @include tablet {
+      height: auto;
+      padding-bottom: 1rem;
+    }
+  }
+
+  &__form {
+    display: grid;
+    grid-auto-rows: 1fr;
+    height: 24rem;
+
+    @include desktop {
+      height: 31rem;
+    }
+  }
+
+  &__group {
+    &--name,
+    &--top {
+      grid-row: 1;
+    }
+
+    &--username,
+    &--bottom {
+      grid-row: 2;
+    }
+
+    &--email {
+      grid-row: 3;
+    }
+
+    &--password {
+      grid-row: 4;
+    }
+
+    &--confirm {
+      grid-row: 5;
+    }
+  }
+
+  &__label {
+    display: none;
+  }
+
+  &__input {
+    @include form-input;
+  }
+
+  &__error {
+    @include label;
+    padding-top: 0.25rem;
+
+    @include desktop {
+      padding-top: 0.5rem;
+      padding-left: 0.25rem;
+      font-size: 1rem;
+    }
+  }
+
+  &__actions {
+    display: grid;
+    grid-row: 6;
+    width: 100%;
+    justify-self: center;
+
+    @include tablet {
+      width: 40%;
+      justify-self: flex-end;
+    }
+  }
+
+  &__submit {
+    @include button;
+    width: 100%;
+    height: 2rem;
+
+    @include tablet {
+      font-size: 1rem;
+      height: 2.25rem;
+    }
+
+    @include desktop {
+      font-size: 1.25rem;
+      height: 2.5rem;
+    }
+  }
+
+  &__response {
+    @extend .log-in__error;
+    justify-self: center;
+    padding-top: 0.25rem;
+
+    @include tablet {
+      padding-top: 0.5rem;
+    }
+  }
 }

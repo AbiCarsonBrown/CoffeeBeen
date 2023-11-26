@@ -24,6 +24,8 @@ export default function Login() {
   const handleIsSignUp = (isSignUp) => {
     setIsSignUp(isSignUp);
     setFormErrors(noFormErrors);
+    setError(null);
+    setSuccess(null);
   };
 
   const handleLogIn = async (event) => {
