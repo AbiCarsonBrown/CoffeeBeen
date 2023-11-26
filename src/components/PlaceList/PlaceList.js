@@ -13,9 +13,11 @@ export default function PlaceList({
 }) {
   return (
     <section className={`place-list place-list--${page}`}>
-      <button onClick={handleClose} className="place-list__close">
-        <Close className="place-list__close-icon" />
-      </button>
+      {page === "profile" && (
+        <button onClick={handleClose} className="place-list__close">
+          <Close className="place-list__close-icon" />
+        </button>
+      )}
       {failedAuth && (
         <p className="place-list__error">
           You must {<Link to="/login">log in</Link>} to use this feature.

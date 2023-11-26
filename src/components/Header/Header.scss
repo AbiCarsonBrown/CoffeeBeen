@@ -97,6 +97,14 @@
       @include desktop {
         height: 3rem;
       }
+
+      &--active {
+        fill: $primary;
+
+        &:hover {
+          fill: $accent-inactive;
+        }
+      }
     }
   }
 

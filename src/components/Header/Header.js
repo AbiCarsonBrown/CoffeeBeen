@@ -4,7 +4,7 @@ import { ReactComponent as User } from "../../assets/icons/user-icon.svg";
 import { ReactComponent as List } from "../../assets/icons/list-icon.svg";
 import { NavLink, Link, useLocation } from "react-router-dom";
 
-export default function Header({ handleShowList }) {
+export default function Header({ handleShowList, showList }) {
   const location = useLocation();
   const token = localStorage.getItem("token");
   const handleLogOut = () => {
@@ -22,7 +22,13 @@ export default function Header({ handleShowList }) {
 
         {location.pathname === "/" && (
           <button onClick={() => handleShowList()} className="header__list">
-            <List fill="white" stroke="white" className="header__list-icon" />
+            <List
+              fill="white"
+              stroke="white"
+              className={`header__list-icon ${
+                showList ? "header__list-icon--active" : ""
+              }`}
+            />
           </button>
         )}
 

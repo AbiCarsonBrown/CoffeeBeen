@@ -10,6 +10,24 @@
     max-width: $mobile-maxwidth;
   }
 
+  &--home {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 2.5vw;
+    overflow: scroll;
+    width: 95vw;
+    height: calc(100vh - 4.5rem);
+    margin: 1rem auto 1rem auto;
+    max-width: none;
+    padding-top: 5rem;
+
+    @include tablet {
+      width: 44vw;
+      max-width: 35rem;
+    }
+  }
+
   &__close {
     justify-self: flex-end;
     background: none;

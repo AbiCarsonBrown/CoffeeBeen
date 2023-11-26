@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header handleShowList={handleShowList} />
+        <Header handleShowList={handleShowList} showList={showList} />
         <Routes>
           <Route
             path="/"
