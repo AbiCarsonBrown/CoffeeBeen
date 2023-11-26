@@ -14,19 +14,41 @@
 
   &__nav {
     @include flex(row, space-between, center);
-    width: 60%;
-    margin: 0 auto;
+  }
+
+  &__link {
+    display: grid;
+    width: 50%;
+    height: 4.5rem;
 
     @include tablet {
-      width: 50%;
+      height: 5rem;
     }
   }
 
-  &__marker {
-    height: 3rem;
-  }
+  &__icon {
+    fill: $accent-inactive;
+    justify-self: center;
+    align-self: center;
 
-  &__profile {
-    height: 2.8rem;
+    &:hover {
+      fill: $accent;
+    }
+
+    &--marker {
+      height: 2.75rem;
+
+      @include tablet {
+        height: 3rem;
+      }
+    }
+
+    &--profile {
+      height: 2.5rem;
+
+      @include tablet {
+        height: 2.75rem;
+      }
+    }
   }
 }

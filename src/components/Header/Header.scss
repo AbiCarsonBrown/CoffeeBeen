@@ -3,6 +3,11 @@
 
 .header {
   @include header-footer;
+  padding: 0.75rem;
+
+  @include tablet {
+    padding: 1rem;
+  }
 
   &__nav {
     width: 100%;
@@ -24,30 +29,28 @@
   }
 
   &__logo {
-    &-link {
-      display: grid;
-      grid-column: 2;
-      grid-row-start: 1;
-      grid-row-end: 3;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
+    display: grid;
+    grid-column: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    text-decoration: none;
+    align-items: center;
 
-      @include tablet {
-        grid-column: 1;
-        grid-row-end: 2;
-        justify-self: flex-start;
-      }
+    @include tablet {
+      grid-column: 1;
+      grid-row-end: 2;
+      justify-self: flex-start;
     }
 
     &-icon {
-      height: 3rem;
-      fill: $primary;
       grid-column: 1;
+      justify-self: flex-end;
+      height: 2.75rem;
+      fill: $accent;
       padding-right: 0.3rem;
 
-      &:hover {
-        fill: $accent;
+      @include tablet {
+        height: 3rem;
       }
 
       @include desktop {
@@ -60,27 +63,22 @@
   &__title {
     @include header-title;
     grid-column: 2;
+    justify-self: flex-start;
   }
 
   &__list {
-    &-button {
-      background: none;
-      border: none;
-      grid-column: 3;
-      grid-row: 2;
-      justify-self: flex-end;
-      padding-top: 0.5rem;
-      cursor: pointer;
+    background: none;
+    border: none;
+    grid-column: 3;
+    grid-row: 2;
+    justify-self: flex-end;
+    padding-top: 0.5rem;
+    cursor: pointer;
 
-      @include tablet {
-        grid-column: 2;
-        grid-row: 1;
-        padding-top: 0.25rem;
-      }
-
-      @include desktop {
-        grid-column: 3;
-      }
+    @include tablet {
+      grid-column: 2;
+      grid-row: 1;
+      padding-top: 0.25rem;
     }
 
     &-icon {
@@ -103,19 +101,17 @@
   }
 
   &__profile {
-    &-link {
-      display: none;
+    display: none;
 
-      @include desktop {
-        display: grid;
-        grid-column: 2;
-      }
+    @include desktop {
+      display: grid;
+      grid-column: 3;
     }
 
     &-icon {
       @include desktop {
         justify-self: flex-end;
-        height: 3rem;
+        height: 2.6rem;
         stroke-width: 0;
         fill: $accent-inactive;
 
@@ -139,7 +135,7 @@
       justify-self: flex-start;
       align-self: center;
       font-size: 0.875rem;
-      padding-left: 1rem;
+      padding-left: 0.75rem;
     }
 
     @include desktop {

@@ -22,7 +22,7 @@ export default function ReviewForm({ review, submitVisit, setEdit }) {
         id="review"
         cols="25"
         rows="5"
-        value={content}
+        value={content ? content : undefined}
         onChange={(event) => setContent(event.target.value)}
         placeholder="Leave your review here"
         className="review-form__input"></textarea>

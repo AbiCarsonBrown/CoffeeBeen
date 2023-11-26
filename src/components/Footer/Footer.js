@@ -12,25 +12,11 @@ export default function Footer() {
         location.pathname === "/login" ? "footer--hide" : ""
       }`}>
       <nav className="footer__nav">
-        <NavLink to="/">
-          {location.pathname === "/" && (
-            <Marker
-              fill="#f6236b"
-              stroke="#f6236b"
-              className="footer__marker"
-            />
-          )}
-          {location.pathname !== "/" && (
-            <Marker fill="white" stroke="white" className="footer__marker" />
-          )}
+        <NavLink to="/" className="footer__link">
+          <Marker className="footer__icon footer__icon--marker" />
         </NavLink>
-        <NavLink to="/profile">
-          {location.pathname === "/profile" && (
-            <User fill="#f6236b" stroke="#f6236b" className="footer__profile" />
-          )}
-          {location.pathname !== "/profile" && (
-            <User fill="white" stroke="white" className="footer__profile" />
-          )}
+        <NavLink to="/profile" className="footer__link">
+          <User className="footer__icon footer__icon--profile" />
         </NavLink>
       </nav>
     </footer>

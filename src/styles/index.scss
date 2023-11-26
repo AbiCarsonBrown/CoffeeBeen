@@ -6,7 +6,6 @@
 main {
   height: calc(100vh - 4.5rem);
   overflow: scroll;
-  background-color: $background;
   padding: 4.5rem 1rem 1rem 1rem;
 
   @include tablet {
@@ -18,5 +17,24 @@ main {
     height: 100vh;
     padding-top: 6.75rem;
     padding-bottom: 0;
+  }
+}
+
+body {
+  background-color: $background;
+}
+
+.active {
+  path {
+    fill: $accent;
+  }
+  border-top: 4px solid $accent;
+
+  @include tablet {
+    border-top: 5px solid $accent;
+  }
+
+  @include desktop {
+    border: none;
   }
 }
