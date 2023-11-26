@@ -21,7 +21,8 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
 
   const options = {
     disableDefaultUI: true,
-    zoomControl: true,
+    zoomControl: false,
+    backgroundColor: "#010402",
     styles: [
       {
         featureType: "poi",
@@ -29,7 +30,7 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
       },
       {
         featureType: "poi.park",
-        stylers: [{ visibility: "simplified" }, { color: "#bbccbb" }],
+        stylers: [{ visibility: "simplified" }, { color: "#594b47" }],
       },
       {
         featureType: "poi.park",
@@ -47,7 +48,7 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
       },
       {
         featureType: "road",
-        stylers: [{ color: "#ece0d1" }],
+        stylers: [{ color: "#f5ddd1" }],
       },
       {
         featureType: "landscape.man_made",
@@ -59,7 +60,11 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
       },
       {
         featureType: "water",
-        stylers: [{ color: "#7d92a5" }],
+        stylers: [{ color: "#eba2d2" }],
+      },
+      {
+        featureType: "administrative",
+        stylers: [{ color: "#f7fdf9" }],
       },
     ],
   };

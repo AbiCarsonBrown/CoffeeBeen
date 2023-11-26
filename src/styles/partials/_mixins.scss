@@ -56,7 +56,7 @@
 }
 
 @mixin header-title {
-  font-family: Lora;
+  font-family: Lora, Georgia, "Times New Roman", Times, serif;
   font-weight: 600;
   font-size: 1.375rem;
   color: $accent;
@@ -71,7 +71,7 @@
 }
 
 @mixin page-header {
-  font-family: Lora;
+  font-family: Lora, Georgia, "Times New Roman", Times, serif;
   font-weight: 700;
   line-height: 1.375;
   font-size: 1.5rem;
@@ -87,7 +87,7 @@
 }
 
 @mixin page-subheader {
-  font-family: Lora;
+  font-family: Lora, Georgia, "Times New Roman", Times, serif;
   font-weight: 600;
   font-size: 1rem;
   color: $primary;
@@ -102,7 +102,7 @@
 }
 
 @mixin subheader {
-  font-family: Lora;
+  font-family: Lora, Georgia, "Times New Roman", Times, serif;
   font-weight: 500;
   font-size: 0.875rem;
 
@@ -144,7 +144,7 @@
 }
 
 @mixin text-button {
-  font-family: Noto Sans Thaana;
+  font-family: Noto Sans Thaana, Arial, Helvetica, sans-serif;
   background: none;
   border: none;
   font-size: 0.875rem;
@@ -163,7 +163,7 @@
 }
 
 @mixin button {
-  font-family: Noto Sans Thaana;
+  font-family: Noto Sans Thaana, Arial, Helvetica, sans-serif;
   background: none;
   border: 1px solid $accent-inactive;
   font-size: 0.75rem;
@@ -185,7 +185,7 @@
 }
 
 @mixin form-input {
-  font-family: Noto Sans Thaana;
+  font-family: Noto Sans Thaana, Arial, Helvetica, sans-serif;
   font-size: 0.875rem;
   color: $accent;
   width: 100%;
