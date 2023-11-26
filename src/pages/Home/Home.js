@@ -1,31 +1,75 @@
 import "./Home.scss";
 import Map from "../../components/Map/Map";
 import PlaceList from "../../components/PlaceList/PlaceList";
-import { useEffect, useState } from "react";
-import { fetchCoffeeShops, fetchUserVisits } from "../../utils/axios";
+import { useCallback, useEffect, useState } from "react";
+import {
+  fetchCoffeeShops,
+  fetchUserVisits,
+  postUserVisit,
+  editUserVisit,
+} from "../../utils/axios";
 
 export default function Home({ showList, setShowList }) {
   const [coffeeShops, setCoffeeShops] = useState(null);
   const [userVisits, setUserVisits] = useState(null);
   const [isOpen, setIsOpen] = useState(null);
+  const [failedAuth, setFailedAuth] = useState(false);
   const token = localStorage.getItem("token");
 
-  const getCoffeeShops = async () => {
+  const getCoffeeShops = useCallback(async () => {
     try {
       const { data } = await fetchCoffeeShops();
       setCoffeeShops(data);
     } catch (error) {
       console.error(error);
     }
-  };
+  }, []);
 
-  const getUserVisits = async () => {
+  const getUserVisits = useCallback(async () => {
     setIsOpen(null);
     try {
       const { data } = await fetchUserVisits(token);
       setUserVisits(data);
     } catch (error) {
       setUserVisits(null);
+    }
+  }, [token]);
+
+  const submitVisit = (
+    visit_id,
+    coffeeshop_id,
+    user_id,
+    visited,
+    on_wishlist,
+    rating,
+    review
+  ) => {
+    const visit = {
+      visit_id,
+      coffeeshop_id,
+      user_id,
+      visited,
+      on_wishlist,
+      rating,
+      review,
+    };
+
+    if (!visit_id) {
+      try {
+        postUserVisit(token, visit);
+        getCoffeeShops();
+        getUserVisits();
+      } catch (error) {
+        setFailedAuth(true);
+      }
+    } else {
+      try {
+        editUserVisit(token, visit);
+        getCoffeeShops();
+        getUserVisits();
+      } catch (error) {
+        setFailedAuth(true);
+      }
     }
   };
 
@@ -35,7 +79,7 @@ export default function Home({ showList, setShowList }) {
     if (token) {
       getUserVisits();
     }
-  }, []);
+  }, [getCoffeeShops, getUserVisits, setShowList, token]);
 
   if (!coffeeShops) {
     return <main>Loading..</main>;
@@ -49,24 +93,16 @@ export default function Home({ showList, setShowList }) {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
-      {userVisits && showList && (
+      {showList && (
         <PlaceList
-          places={userVisits}
+          places={userVisits ? userVisits : coffeeShops}
           handleClose={() => {
             setShowList(false);
           }}
-          getCoffeeShops={getCoffeeShops}
-          getUserVisits={getUserVisits}
-        />
-      )}
-      {!userVisits && showList && (
-        <PlaceList
-          places={coffeeShops}
-          handleClose={() => {
-            setShowList(false);
-          }}
-          getCoffeeShops={getCoffeeShops}
-          getUserVisits={getUserVisits}
+          page="home"
+          submitVisit={submitVisit}
+          failedAuth={failedAuth}
+          setFailedAuth={setFailedAuth}
         />
       )}
     </main>

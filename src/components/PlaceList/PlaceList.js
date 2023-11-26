@@ -1,11 +1,16 @@
 import "./PlaceList.scss";
 import PlaceCard from "../PlaceCard/PlaceCard";
 import { ReactComponent as Close } from "../../assets/icons/close-icon.svg";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function PlaceList({ places, handleClose, page, submitVisit }) {
-  const [failedAuth, setFailedAuth] = useState(false);
+export default function PlaceList({
+  places,
+  handleClose,
+  page,
+  submitVisit,
+  failedAuth,
+  setFailedAuth,
+}) {
   return (
     <section className={`place-list place-list--${page}`}>
       <button onClick={handleClose} className="place-list__close">

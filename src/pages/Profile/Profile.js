@@ -123,6 +123,8 @@ export default function Profile() {
             handleClose={handleClose}
             page="profile"
             submitVisit={submitVisit}
+            failedAuth={failedAuth}
+            setFailedAuth={setFailedAuth}
           />
         )}
 
@@ -132,6 +134,8 @@ export default function Profile() {
             handleClose={handleClose}
             page="profile"
             submitVisit={submitVisit}
+            failedAuth={failedAuth}
+            setFailedAuth={setFailedAuth}
           />
         )}
 
@@ -141,6 +145,8 @@ export default function Profile() {
             handleClose={handleClose}
             page="profile"
             submitVisit={submitVisit}
+            failedAuth={failedAuth}
+            setFailedAuth={setFailedAuth}
           />
         )}
       </div>
