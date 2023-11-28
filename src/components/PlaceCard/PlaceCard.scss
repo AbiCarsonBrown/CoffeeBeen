@@ -9,8 +9,12 @@
   margin-bottom: 1.5rem;
 
   @include tablet {
-    grid-template-columns: 60%;
+    grid-template-columns: 55% 5% 20% 20%;
     padding: 1.25rem;
+  }
+
+  @include desktop {
+    grid-template-columns: 65% 5% 15% 15%;
   }
 
   &__name {
@@ -54,18 +58,10 @@
 
     &--marker {
       grid-column: 3;
-
-      @include tablet {
-        grid-column: 5;
-      }
     }
 
     &--bookmark {
       grid-column: 4;
-
-      @include tablet {
-        grid-column: 6;
-      }
     }
   }
 }

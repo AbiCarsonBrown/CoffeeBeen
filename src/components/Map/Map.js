@@ -44,7 +44,7 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
             return (
               <MarkerF
                 key={coffeeshop_id}
-                icon={visitedPin}
+                icon={notVisitedPin}
                 position={{
                   lat: Number(latitude),
                   lng: Number(longitude),
