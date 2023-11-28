@@ -13,6 +13,7 @@ import {
 } from "../../utils/customIcons";
 import {
   fetchCoffeeShop,
+  fetchUser,
   postUserVisit,
   editUserVisit,
   fetchSingleUserVisit,
@@ -25,6 +26,7 @@ export default function CoffeeShop() {
   const [seeReviews, setSeeReviews] = useState(true);
   const [visitError, setVisitError] = useState(false);
   const [coffeeShop, setCoffeeShop] = useState(null);
+  const [user, setUser] = useState(null);
   const [visits, setVisits] = useState(null);
   const [userVisit, setUserVisit] = useState(null);
   const [visited, setVisited] = useState(null);
@@ -38,11 +40,15 @@ export default function CoffeeShop() {
 
   const getSingleUserVisit = useCallback(async () => {
     try {
-      const { data } = await fetchSingleUserVisit(token, coffeeShopId);
-      setUserVisit(data[0]);
-      setVisited(data[0].visited);
-      setBookmark(data[0].on_wishlist);
+      const singleUserVisit = await fetchSingleUserVisit(token, coffeeShopId);
+      const userResponse = await fetchUser(token);
+      setUser(userResponse.data);
+      setUserVisit(singleUserVisit.data);
+      setVisited(singleUserVisit.data.visited);
+      setBookmark(singleUserVisit.data.on_wishlist);
+      console.log(singleUserVisit.data, userResponse.data);
     } catch (error) {
+      setUser(null);
       setUserVisit(null);
       setVisited(null);
       setBookmark(null);
@@ -52,7 +58,7 @@ export default function CoffeeShop() {
   const getCoffeeShop = useCallback(async () => {
     try {
       const { data } = await fetchCoffeeShop(coffeeShopId);
-      setCoffeeShop(data[0][0]);
+      setCoffeeShop(data[0]);
       setVisits(data[1]);
     } catch (error) {
       console.error(error);
@@ -71,27 +77,35 @@ export default function CoffeeShop() {
   }, [token, getSingleUserVisit, getCoffeeShop]);
 
   const submitVisit = (visited, wished, rating, review) => {
-    const visit = {
-      visit_id: userVisit.visit_id,
-      coffeeshop_id: userVisit.coffeeshop_id,
-      user_id: userVisit.user_id,
-      visited: visited,
-      on_wishlist: wished,
-      rating: rating,
-      review: review,
-    };
-
-    if (!userVisit.visit_id) {
+    if (userVisit.visit_id) {
+      const visit = {
+        visit_id: userVisit.visit_id,
+        coffeeshop_id: userVisit.coffeeshop_id,
+        user_id: userVisit.user_id,
+        visited: visited,
+        on_wishlist: wished,
+        rating: rating,
+        review: review,
+      };
       try {
-        postUserVisit(token, visit);
+        editUserVisit(token, visit);
         getCoffeeShop();
         getSingleUserVisit();
       } catch (error) {
         setFailedAuth(true);
       }
     } else {
+      const visit = {
+        coffeeshop_id: coffeeShopId,
+        user_id: user.id,
+        visited: visited,
+        on_wishlist: wished,
+        rating: rating,
+        review: review,
+      };
+      console.log(visit);
       try {
-        editUserVisit(token, visit);
+        postUserVisit(token, visit);
         getCoffeeShop();
         getSingleUserVisit();
       } catch (error) {
@@ -118,12 +132,16 @@ export default function CoffeeShop() {
   const handleBookmark = (bookmarkVal) => {
     setBookmark(bookmarkVal);
     if (token) {
-      submitVisit(
-        userVisit.visited,
-        bookmarkVal,
-        userVisit.rating,
-        userVisit.review
-      );
+      if (userVisit) {
+        submitVisit(
+          userVisit.visited,
+          bookmarkVal,
+          userVisit.rating,
+          userVisit.review
+        );
+      } else {
+        submitVisit(null, bookmarkVal, null, null);
+      }
     } else {
       setFailedAuth(true);
       setVisitError(true);
