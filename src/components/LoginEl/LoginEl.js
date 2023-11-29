@@ -25,6 +25,7 @@ export default function LoginEl({
                 name="name"
                 className="log-in__input"
                 placeholder="Full Name"
+                autoComplete="name"
               />
               {formErrors.name && (
                 <p className="log-in__error">Please enter your full name</p>
@@ -62,6 +63,7 @@ export default function LoginEl({
             name="email"
             className="log-in__input"
             placeholder="Email Address"
+            autoComplete="email"
           />
           {formErrors.email && (
             <p className="log-in__error">Please enter your email address</p>
@@ -80,6 +82,7 @@ export default function LoginEl({
             id="password"
             name="password"
             className="log-in__input"
+            autoComplete="current-password"
             placeholder={`${isSignUp ? "Choose Password" : "Password"}`}
           />
 
