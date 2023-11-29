@@ -46,7 +46,6 @@ export default function CoffeeShop() {
       setUserVisit(singleUserVisit.data);
       setVisited(singleUserVisit.data.visited);
       setBookmark(singleUserVisit.data.on_wishlist);
-      console.log(singleUserVisit.data, userResponse.data);
     } catch (error) {
       setUser(null);
       setUserVisit(null);
@@ -76,7 +75,7 @@ export default function CoffeeShop() {
     setIsLoading(false);
   }, [token, getSingleUserVisit, getCoffeeShop]);
 
-  const submitVisit = (visited, wished, rating, review) => {
+  const submitVisit = async (visited, wished, rating, review) => {
     if (userVisit.visit_id) {
       const visit = {
         visit_id: userVisit.visit_id,
@@ -88,7 +87,7 @@ export default function CoffeeShop() {
         review: review,
       };
       try {
-        editUserVisit(token, visit);
+        await editUserVisit(token, visit);
         getCoffeeShop();
         getSingleUserVisit();
       } catch (error) {
@@ -103,9 +102,8 @@ export default function CoffeeShop() {
         rating: rating,
         review: review,
       };
-      console.log(visit);
       try {
-        postUserVisit(token, visit);
+        await postUserVisit(token, visit);
         getCoffeeShop();
         getSingleUserVisit();
       } catch (error) {

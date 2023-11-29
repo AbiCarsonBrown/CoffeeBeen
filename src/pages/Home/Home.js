@@ -35,7 +35,7 @@ export default function Home({ showList, setShowList }) {
     }
   }, [token]);
 
-  const submitVisit = (
+  const submitVisit = async (
     visit_id,
     coffeeshop_id,
     user_id,
@@ -56,7 +56,7 @@ export default function Home({ showList, setShowList }) {
 
     if (!visit_id) {
       try {
-        postUserVisit(token, visit);
+        await postUserVisit(token, visit);
         getCoffeeShops();
         getUserVisits();
       } catch (error) {
@@ -64,7 +64,7 @@ export default function Home({ showList, setShowList }) {
       }
     } else {
       try {
-        editUserVisit(token, visit);
+        await editUserVisit(token, visit);
         getCoffeeShops();
         getUserVisits();
       } catch (error) {

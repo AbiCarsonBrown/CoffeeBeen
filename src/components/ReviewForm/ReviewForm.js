@@ -17,6 +17,9 @@ export default function ReviewForm({ review, submitVisit, setEdit }) {
 
   return (
     <form className="review-form" onSubmit={handleReview}>
+      <label htmlFor="review" className="review-form__label">
+        Review
+      </label>
       <textarea
         name="review"
         id="review"

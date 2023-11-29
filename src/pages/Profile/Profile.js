@@ -30,7 +30,7 @@ export default function Profile() {
     setShow(null);
   };
 
-  const submitVisit = (
+  const submitVisit = async (
     visit_id,
     coffeeshop_id,
     user_id,
@@ -51,14 +51,14 @@ export default function Profile() {
 
     if (!visit_id) {
       try {
-        postUserVisit(token, visit);
+        await postUserVisit(token, visit);
         login();
       } catch (error) {
         setFailedAuth(true);
       }
     } else {
       try {
-        editUserVisit(token, visit);
+        await editUserVisit(token, visit);
         login();
       } catch (error) {
         setFailedAuth(true);
