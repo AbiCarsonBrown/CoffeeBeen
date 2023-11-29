@@ -1,6 +1,7 @@
 import "./Map.scss";
 import visitedPin from "../../assets/icons/marker-visited.svg";
 import notVisitedPin from "../../assets/icons/marker-not-visited.svg";
+import locationPin from "../../assets/icons/location-icon.svg";
 import {
   GoogleMap,
   InfoWindowF,
@@ -140,6 +141,14 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
             );
           }
         )}
+      {coords && (
+        <MarkerF
+          icon={locationPin}
+          position={{
+            lat: coords.latitude,
+            lng: coords.longitude,
+          }}></MarkerF>
+      )}
     </GoogleMap>
   );
 }
