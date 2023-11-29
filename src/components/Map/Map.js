@@ -9,15 +9,30 @@ import {
 } from "@react-google-maps/api";
 import { Link } from "react-router-dom";
 import { options } from "../../utils/GoogleMapsStyles";
+import { useGeolocated } from "react-geolocated";
+import { useEffect, useState } from "react";
 
 export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
-  const center = { lat: 51.507744, lng: -0.119071 };
+  const [center, setCenter] = useState({ lat: 51.507744, lng: -0.119071 });
 
-  const handleInfoOpen = (id) => {
+  const { coords } = useGeolocated({
+    positionOptions: {
+      enableHighAccuracy: false,
+    },
+    userDecisionTimeout: 5000,
+  });
+  useEffect(() => {
+    if (coords) {
+      setCenter({ lat: coords.latitude, lng: coords.longitude });
+    }
+  }, [coords]);
+
+  const handleInfoOpen = (id, latitude, longitude) => {
     setIsOpen(id);
+    setCenter({ lat: latitude, lng: longitude });
   };
 
   let userVisited = null;
@@ -37,7 +52,7 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
       mapContainerClassName="map-container"
       center={center}
       options={options}
-      zoom={14}>
+      zoom={14.5}>
       {!userVisits &&
         coffeeShops.map(
           ({ coffeeshop_id, coffeeshop_name, latitude, longitude }) => {
@@ -49,7 +64,13 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
                   lat: Number(latitude),
                   lng: Number(longitude),
                 }}
-                onClick={() => handleInfoOpen(coffeeshop_id)}>
+                onClick={() =>
+                  handleInfoOpen(
+                    coffeeshop_id,
+                    Number(latitude),
+                    Number(longitude)
+                  )
+                }>
                 {isOpen === coffeeshop_id && (
                   <InfoWindowF>
                     <Link to={`/places/${coffeeshop_id}`}>
@@ -72,7 +93,13 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
                   lat: Number(latitude),
                   lng: Number(longitude),
                 }}
-                onClick={() => handleInfoOpen(coffeeshop_id)}>
+                onClick={() =>
+                  handleInfoOpen(
+                    coffeeshop_id,
+                    Number(latitude),
+                    Number(longitude)
+                  )
+                }>
                 {isOpen === coffeeshop_id && (
                   <InfoWindowF>
                     <Link to={`/places/${coffeeshop_id}`}>
@@ -95,7 +122,13 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
                   lat: Number(latitude),
                   lng: Number(longitude),
                 }}
-                onClick={() => handleInfoOpen(coffeeshop_id)}>
+                onClick={() =>
+                  handleInfoOpen(
+                    coffeeshop_id,
+                    Number(latitude),
+                    Number(longitude)
+                  )
+                }>
                 {isOpen === coffeeshop_id && (
                   <InfoWindowF>
                     <Link to={`/places/${coffeeshop_id}`}>
