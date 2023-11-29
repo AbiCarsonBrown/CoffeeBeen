@@ -106,10 +106,10 @@
 
     &-link {
       text-decoration: none;
-      color: $primary;
+      color: $accent-inactive;
 
       &:hover {
-        color: $accent-inactive;
+        color: $accent;
       }
     }
   }
@@ -170,7 +170,7 @@
     padding-left: 0.25rem;
 
     &:hover {
-      fill: $primary;
+      fill: $accent;
     }
 
     @include desktop {

@@ -90,7 +90,7 @@
   font-family: Lora, Georgia, "Times New Roman", Times, serif;
   font-weight: 600;
   font-size: 1rem;
-  color: $primary;
+  color: $tertiary;
 
   @include tablet {
     font-size: 1.25rem;
@@ -154,7 +154,7 @@
   cursor: pointer;
 
   &:hover {
-    color: $primary;
+    color: $accent;
   }
 
   @include desktop {

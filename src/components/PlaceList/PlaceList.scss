@@ -77,10 +77,10 @@
 
     &-link {
       text-decoration: none;
-      color: $primary;
+      color: $accent-inactive;
 
       &:hover {
-        color: $accent-inactive;
+        color: $accent;
       }
     }
   }

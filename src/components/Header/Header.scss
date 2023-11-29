@@ -87,7 +87,7 @@
       stroke-width: 0;
 
       &:hover {
-        fill: $primary;
+        fill: $accent;
       }
 
       @include tablet {
@@ -99,10 +99,10 @@
       }
 
       &--active {
-        fill: $primary;
+        fill: $accent-inactive;
 
         &:hover {
-          fill: $accent-inactive;
+          fill: $accent;
         }
       }
     }
@@ -124,7 +124,7 @@
         fill: $accent-inactive;
 
         &:hover {
-          fill: $primary;
+          fill: $accent;
         }
       }
     }
