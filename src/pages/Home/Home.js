@@ -62,7 +62,7 @@ export default function Home({ showList, setShowList }) {
     } catch (error) {
       console.error(error);
     }
-  }, [center.lat, center.lng]);
+  }, [coords]);
 
   const getUserVisits = useCallback(async () => {
     setIsOpen(null);
@@ -97,7 +97,7 @@ export default function Home({ showList, setShowList }) {
     } catch (error) {
       setUserVisits(null);
     }
-  }, [token, center.lat, center.lng]);
+  }, [token, coords]);
 
   const submitVisit = async (
     visit_id,
