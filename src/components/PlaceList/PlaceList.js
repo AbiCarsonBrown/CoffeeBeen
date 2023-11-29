@@ -29,16 +29,20 @@ export default function PlaceList({
           to use this feature.
         </p>
       )}
-      {places.map((place) => {
-        return (
-          <PlaceCard
-            key={place.coffeeshop_id}
-            place={place}
-            submitVisit={submitVisit}
-            setFailedAuth={setFailedAuth}
-          />
-        );
-      })}
+      {places
+        .sort((a, b) => {
+          return a.distance - b.distance;
+        })
+        .map((place) => {
+          return (
+            <PlaceCard
+              key={place.coffeeshop_id}
+              place={place}
+              submitVisit={submitVisit}
+              setFailedAuth={setFailedAuth}
+            />
+          );
+        })}
     </section>
   );
 }

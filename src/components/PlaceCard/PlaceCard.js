@@ -50,6 +50,9 @@ export default function PlaceCard({ place, submitVisit, setFailedAuth }) {
         {place.coffeeshop_name}
       </Link>
       <p className="place-card__address">{place.address}</p>
+      {place.distance && (
+        <p className="place-card__distance">{place.distance} km away</p>
+      )}
       <Rating
         style={{ maxWidth: 50 }}
         value={visited}

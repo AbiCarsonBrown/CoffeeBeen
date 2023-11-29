@@ -10,30 +10,23 @@ import {
 } from "@react-google-maps/api";
 import { Link } from "react-router-dom";
 import { options } from "../../utils/GoogleMapsStyles";
-import { useGeolocated } from "react-geolocated";
-import { useEffect, useState } from "react";
 
-export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
+export default function Map({
+  coffeeShops,
+  userVisits,
+  isOpen,
+  setIsOpen,
+  center,
+  setCenter,
+  coords,
+}) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
-  const [center, setCenter] = useState({ lat: 51.507744, lng: -0.119071 });
 
-  const { coords } = useGeolocated({
-    positionOptions: {
-      enableHighAccuracy: false,
-    },
-    userDecisionTimeout: 5000,
-  });
-  useEffect(() => {
-    if (coords) {
-      setCenter({ lat: coords.latitude, lng: coords.longitude });
-    }
-  }, [coords]);
-
-  const handleInfoOpen = (id, latitude, longitude) => {
+  const handleInfoOpen = async (id, latitude, longitude) => {
+    await setCenter({ lat: latitude, lng: longitude });
     setIsOpen(id);
-    setCenter({ lat: latitude, lng: longitude });
   };
 
   let userVisited = null;
@@ -56,7 +49,13 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
       zoom={14.5}>
       {!userVisits &&
         coffeeShops.map(
-          ({ coffeeshop_id, coffeeshop_name, latitude, longitude }) => {
+          ({
+            coffeeshop_id,
+            coffeeshop_name,
+            latitude,
+            longitude,
+            distance,
+          }) => {
             return (
               <MarkerF
                 key={coffeeshop_id}
@@ -69,14 +68,18 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
                   handleInfoOpen(
                     coffeeshop_id,
                     Number(latitude),
-                    Number(longitude)
+                    Number(longitude),
+                    distance
                   )
                 }>
                 {isOpen === coffeeshop_id && (
                   <InfoWindowF>
-                    <Link to={`/places/${coffeeshop_id}`}>
-                      {coffeeshop_name}
-                    </Link>
+                    <>
+                      <Link to={`/places/${coffeeshop_id}`}>
+                        {coffeeshop_name}
+                      </Link>
+                      {coords && <p>{distance} km away</p>}
+                    </>
                   </InfoWindowF>
                 )}
               </MarkerF>
@@ -85,7 +88,13 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
         )}
       {userVisited &&
         userVisited.map(
-          ({ coffeeshop_id, coffeeshop_name, latitude, longitude }) => {
+          ({
+            coffeeshop_id,
+            coffeeshop_name,
+            latitude,
+            longitude,
+            distance,
+          }) => {
             return (
               <MarkerF
                 key={coffeeshop_id}
@@ -98,14 +107,18 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
                   handleInfoOpen(
                     coffeeshop_id,
                     Number(latitude),
-                    Number(longitude)
+                    Number(longitude),
+                    distance
                   )
                 }>
                 {isOpen === coffeeshop_id && (
                   <InfoWindowF>
-                    <Link to={`/places/${coffeeshop_id}`}>
-                      {coffeeshop_name}
-                    </Link>
+                    <>
+                      <Link to={`/places/${coffeeshop_id}`}>
+                        {coffeeshop_name}
+                      </Link>
+                      {coords && <p>{distance} km away</p>}
+                    </>
                   </InfoWindowF>
                 )}
               </MarkerF>
@@ -114,7 +127,13 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
         )}
       {notVisited &&
         notVisited.map(
-          ({ coffeeshop_id, coffeeshop_name, latitude, longitude }) => {
+          ({
+            coffeeshop_id,
+            coffeeshop_name,
+            latitude,
+            longitude,
+            distance,
+          }) => {
             return (
               <MarkerF
                 key={coffeeshop_id}
@@ -127,14 +146,18 @@ export default function Map({ coffeeShops, userVisits, isOpen, setIsOpen }) {
                   handleInfoOpen(
                     coffeeshop_id,
                     Number(latitude),
-                    Number(longitude)
+                    Number(longitude),
+                    distance
                   )
                 }>
                 {isOpen === coffeeshop_id && (
                   <InfoWindowF>
-                    <Link to={`/places/${coffeeshop_id}`}>
-                      {coffeeshop_name}
-                    </Link>
+                    <>
+                      <Link to={`/places/${coffeeshop_id}`}>
+                        {coffeeshop_name}
+                      </Link>
+                      {coords && <p>{distance} km away</p>}
+                    </>
                   </InfoWindowF>
                 )}
               </MarkerF>
