@@ -19,6 +19,7 @@ import {
   fetchSingleUserVisit,
 } from "../../utils/axios";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import Loading from "../../components/Loading/Loading";
 
 export default function CoffeeShop() {
   const [isLoading, setIsLoading] = useState(true);
@@ -147,7 +148,7 @@ export default function CoffeeShop() {
   };
 
   if (isLoading || !visits) {
-    return <main className="loading">Loading...</main>;
+    return <Loading />;
   }
 
   const reviews =

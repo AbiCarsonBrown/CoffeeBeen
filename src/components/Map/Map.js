@@ -10,6 +10,7 @@ import {
 } from "@react-google-maps/api";
 import { Link } from "react-router-dom";
 import { options } from "../../utils/GoogleMapsStyles";
+import Loading from "../Loading/Loading";
 
 export default function Map({
   coffeeShops,
@@ -38,7 +39,7 @@ export default function Map({
   }
 
   if (!isLoaded) {
-    return <h1>Loading...</h1>;
+    return <Loading />;
   }
 
   return (

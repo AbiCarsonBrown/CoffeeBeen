@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import { fetchUser, fetchUserVisits } from "../../utils/axios";
 import PlaceList from "../../components/PlaceList/PlaceList";
 import { postUserVisit, editUserVisit } from "../../utils/axios";
+import Loading from "../../components/Loading/Loading";
 
 export default function Profile() {
   const [isLoading, setIsLoading] = useState(true);
@@ -77,7 +78,7 @@ export default function Profile() {
   }
 
   if (isLoading) {
-    return <main className="dashboard">Loading...</main>;
+    return <Loading />;
   }
 
   const been = visits.filter((visit) => {

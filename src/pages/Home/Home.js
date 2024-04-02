@@ -9,6 +9,7 @@ import {
   postUserVisit,
   editUserVisit,
 } from "../../utils/axios";
+import Loading from "../../components/Loading/Loading";
 const geolib = require("geolib");
 
 export default function Home({ showList, setShowList }) {
@@ -146,7 +147,7 @@ export default function Home({ showList, setShowList }) {
   }, [getCoffeeShops, getUserVisits, setShowList, token]);
 
   if (!coffeeShops) {
-    return <main>Loading..</main>;
+    return <Loading />;
   }
 
   return (
