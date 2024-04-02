@@ -1,0 +1,41 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.loading {
+  &__wrapper {
+    @include wrapper;
+    display: grid;
+    grid-template-rows: repeat(10, 10%);
+    height: 100%;
+    text-align: center;
+
+    @include tablet {
+      grid-template-rows: repeat(20, 5%);
+    }
+  }
+
+  &__title {
+    @include page-header;
+    grid-row: 3;
+  }
+
+  &__content {
+    @include main-body;
+
+    &--brewing {
+      grid-row: 4;
+
+      @include tablet {
+        grid-row: 6;
+      }
+    }
+
+    &--caffeine {
+      grid-row: 5;
+
+      @include tablet {
+        grid-row: 8;
+      }
+    }
+  }
+}
