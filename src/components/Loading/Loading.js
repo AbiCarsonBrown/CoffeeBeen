@@ -1,4 +1,5 @@
 import "./Loading.scss";
+import BeatLoader from "react-spinners/BeatLoader";
 
 export default function Loading() {
   return (
@@ -11,6 +12,13 @@ export default function Loading() {
         <p className="loading__content loading__content--caffeine">
           Just hang tight while we pour in some digital caffeine!
         </p>
+        <BeatLoader
+          color="#f7fdf9"
+          loading="true"
+          aria-label="Loading Spinner"
+          data-testid="loader"
+          className="loading__loader"
+        />
       </div>
     </main>
   );

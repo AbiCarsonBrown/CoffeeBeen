@@ -5,13 +5,10 @@
   &__wrapper {
     @include wrapper;
     display: grid;
-    grid-template-rows: repeat(10, 10%);
+    grid-template-rows: repeat(20, 5%);
     height: 100%;
     text-align: center;
-
-    @include tablet {
-      grid-template-rows: repeat(20, 5%);
-    }
+    justify-items: center;
   }
 
   &__title {
@@ -23,19 +20,19 @@
     @include main-body;
 
     &--brewing {
-      grid-row: 4;
-
-      @include tablet {
-        grid-row: 6;
-      }
+      grid-row: 6;
     }
 
     &--caffeine {
-      grid-row: 5;
-
-      @include tablet {
-        grid-row: 8;
-      }
+      grid-row: 8;
     }
+  }
+
+  &__loader {
+    grid-row: 10;
+    display: grid;
+    grid-template-rows: 1;
+    grid-template-columns: repeat(3, 30px);
+    justify-items: center;
   }
 }
